@@ -1,0 +1,40 @@
+@import "./reset.css";
+
+body {
+    font-family: "Roboto", sans-serif;
+    font-size: 16px;
+    line-height: 1.5;
+    color: #fff;
+    background-color: #161a1d;
+}
+
+a {
+    color: #fff;
+    text-decoration: none;
+}
+
+.login {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.login-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    border: 1px solid #555;
+    border-radius: 0.5rem;
+    padding: 2rem;
+}
+
+.login-button {
+    display: block;
+    padding: 0.75rem;
+    border-radius: 0.25rem;
+    background-color: #555;
+    color: #fff;
+    text-align: center;
+    transition: background-color 0.2s;
+}

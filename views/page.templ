@@ -1,0 +1,33 @@
+package views
+
+import "github.com/markbates/goth"
+import "fmt"
+
+templ Page(nav bool, user goth.User) {
+	<!DOCTYPE html>
+	<html lang="en">
+		<head>
+			<title>mnemstart</title>
+			<meta charset="UTF-8"/>
+			<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+			<link rel="stylesheet" href="/public/styles.css"/>
+			<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
+			<script src="https://unpkg.com/htmx.org@2.0.2"></script>
+		</head>
+		<body>
+			if nav {
+				<nav>
+					<a href="/">Home</a>
+					if user.Name != "" {
+						<a href={ templ.SafeURL(fmt.Sprintf("/auth/%s/logout", user.Provider)) }>
+							Logout
+						</a>
+						<span>Welcome, { user.Name }</span>
+						<img src={ user.AvatarURL }/>
+					}
+				</nav>
+			}
+			{ children... }
+		</body>
+	</html>
+}

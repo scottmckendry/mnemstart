@@ -1,0 +1,19 @@
+package views
+
+import "github.com/markbates/goth"
+
+templ Login() {
+	@Page(false, goth.User{}) {
+		<div class="login">
+			<div class="login-buttons">
+				<h2>Login with:</h2>
+				<div class="login-button">
+					<icon class="fab fa-github"></icon>
+					<a href="/auth/github">
+						GitHub
+					</a>
+				</div>
+			</div>
+		</div>
+	}
+}

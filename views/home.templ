@@ -1,0 +1,14 @@
+package views
+
+import "github.com/markbates/goth"
+
+templ Home(user goth.User) {
+	@Page(true, user) {
+		<h1>mnemstart </h1>
+		<div>
+			<p>
+				Welcome to mnemstart { user.Name }!
+			</p>
+		</div>
+	}
+}

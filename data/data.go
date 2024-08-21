@@ -2,6 +2,7 @@ package data
 
 import (
 	"database/sql"
+	"fmt"
 
 	"github.com/markbates/goth"
 )
@@ -24,14 +25,19 @@ func NewStore(db *sql.DB) *Storage {
 	}
 }
 
-func (s *Storage) CreateUser(gothUser goth.User) error {
+func (s *Storage) CreateOrUpdateUser(gothUser goth.User) error {
 	user := buildUserFromGothUser(gothUser)
 	err := getUser(s.db, user)
 	if err != nil {
 		err = createUser(s.db, user)
 		if err != nil {
-			return err
+			return fmt.Errorf("Error creating user: %v", err)
 		}
+	}
+
+	err = updateUser(s.db, user)
+	if err != nil {
+		return fmt.Errorf("Error updating user: %v", err)
 	}
 
 	return nil
@@ -54,6 +60,21 @@ func createUser(db *sql.DB, user *User) error {
 		user.Email,
 		user.DiscordID,
 		user.GithubID,
+	)
+	if err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func updateUser(db *sql.DB, user *User) error {
+	_, err := db.Exec(
+		"UPDATE users SET name = ?, discord_id = ?, github_id = ? WHERE email = ?",
+		user.Name,
+		user.DiscordID,
+		user.GithubID,
+		user.Email,
 	)
 	if err != nil {
 		return err

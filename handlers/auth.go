@@ -46,9 +46,9 @@ func (h *Handler) HandleAuthCallbackFunction(w http.ResponseWriter, r *http.Requ
 		return
 	}
 
-	err = h.store.CreateUser(user)
+	err = h.store.CreateOrUpdateUser(user)
 	if err != nil {
-		log.Printf("Error getting or creating user: %v", err)
+		log.Println(err)
 		return
 	}
 

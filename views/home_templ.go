@@ -8,9 +8,12 @@ package views
 import "github.com/a-h/templ"
 import templruntime "github.com/a-h/templ/runtime"
 
-import "github.com/markbates/goth"
+import (
+	"github.com/markbates/goth"
+	"github.com/scottmckendry/mnemstart/data"
+)
 
-func Home(user goth.User) templ.Component {
+func Home(user goth.User, settings *data.UserSettings) templ.Component {
 	return templruntime.GeneratedTemplate(func(templ_7745c5c3_Input templruntime.GeneratedComponentInput) (templ_7745c5c3_Err error) {
 		templ_7745c5c3_W, ctx := templ_7745c5c3_Input.Writer, templ_7745c5c3_Input.Context
 		templ_7745c5c3_Buffer, templ_7745c5c3_IsBuffer := templruntime.GetBuffer(templ_7745c5c3_W)
@@ -28,6 +31,10 @@ func Home(user goth.User) templ.Component {
 			templ_7745c5c3_Var1 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
+		templ_7745c5c3_Err = templ.JSONScript("userSettings", settings).Render(ctx, templ_7745c5c3_Buffer)
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
 		templ_7745c5c3_Var2 := templruntime.GeneratedTemplate(func(templ_7745c5c3_Input templruntime.GeneratedComponentInput) (templ_7745c5c3_Err error) {
 			templ_7745c5c3_W, ctx := templ_7745c5c3_Input.Writer, templ_7745c5c3_Input.Context
 			templ_7745c5c3_Buffer, templ_7745c5c3_IsBuffer := templruntime.GetBuffer(templ_7745c5c3_W)
@@ -40,7 +47,16 @@ func Home(user goth.User) templ.Component {
 				}()
 			}
 			ctx = templ.InitializeContext(ctx)
-			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<h1>mnemstart</h1><form action=\"https://duckduckgo.com\" method=\"get\"><input type=\"text\" id=\"search\" name=\"q\" placeholder=\"Search...\"></form><script>\r\n            const leaderKey = ' ';\r\n            const keymaps = {\r\n                'gh': 'https://github.com',\r\n                'yt': 'https://youtube.com',\r\n                'li': 'https://linkedin.com',\r\n                'iv': 'https://invoices.nyx.scottmckendry.tech'\r\n            };\r\n        </script> <script src=\"/public/js/input.js\"></script>")
+			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<h1>mnemstart</h1><form action=\"")
+			if templ_7745c5c3_Err != nil {
+				return templ_7745c5c3_Err
+			}
+			var templ_7745c5c3_Var3 templ.SafeURL = templ.SafeURL(settings.SearchEngine)
+			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(string(templ_7745c5c3_Var3)))
+			if templ_7745c5c3_Err != nil {
+				return templ_7745c5c3_Err
+			}
+			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("\" method=\"get\"><input type=\"text\" id=\"search\" name=\"q\" placeholder=\"Search...\"></form><script src=\"/public/js/input.js\"></script>")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}

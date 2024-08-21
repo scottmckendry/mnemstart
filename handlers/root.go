@@ -14,5 +14,7 @@ func (h *Handler) HandleRoot(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	views.Home(user).Render(r.Context(), w)
+	userSettings := h.store.GetUserSettings(user.Email)
+
+	views.Home(user, userSettings).Render(r.Context(), w)
 }

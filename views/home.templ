@@ -1,22 +1,17 @@
 package views
 
-import "github.com/markbates/goth"
+import (
+	"github.com/markbates/goth"
+	"github.com/scottmckendry/mnemstart/data"
+)
 
-templ Home(user goth.User) {
+templ Home(user goth.User, settings *data.UserSettings) {
+	@templ.JSONScript("userSettings", settings)
 	@Page(true, user) {
 		<h1>mnemstart</h1>
-		<form action="https://duckduckgo.com" method="get">
+		<form action={ templ.SafeURL(settings.SearchEngine) } method="get">
 			<input type="text" id="search" name="q" placeholder="Search..."/>
 		</form>
-		<script>
-            const leaderKey = ' ';
-            const keymaps = {
-                'gh': 'https://github.com',
-                'yt': 'https://youtube.com',
-                'li': 'https://linkedin.com',
-                'iv': 'https://invoices.nyx.scottmckendry.tech'
-            };
-        </script>
 		<script src="/public/js/input.js"></script>
 	}
 }

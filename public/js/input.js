@@ -1,6 +1,13 @@
 let inputSequence = [];
 let leaderMode = false;
 
+const userSettings = JSON.parse(
+    document.getElementById("userSettings").textContent,
+);
+
+const keymaps = userSettings.Mappings;
+const leaderKey = userSettings.LeaderKey;
+
 document.addEventListener("keydown", (event) => {
     const key = event.key;
 

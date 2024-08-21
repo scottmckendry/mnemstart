@@ -46,8 +46,6 @@ func (a *AuthService) GetSessionUser(r *http.Request) (goth.User, error) {
 		return goth.User{}, fmt.Errorf("user is unauthenticated! %v", user)
 	}
 
-	log.Printf("User session found: %v", user)
-
 	return user.(goth.User), nil
 }
 
@@ -91,7 +89,7 @@ func RequireAuth(handlerFunc http.HandlerFunc, auth *AuthService) http.HandlerFu
 			return
 		}
 
-		log.Printf("Authenticated user: %v", session.Name)
+		log.Printf("Authenticated user: %v", session.Email)
 		handlerFunc(w, r)
 	}
 }

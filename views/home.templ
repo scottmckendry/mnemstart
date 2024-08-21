@@ -4,11 +4,62 @@ import "github.com/markbates/goth"
 
 templ Home(user goth.User) {
 	@Page(true, user) {
-		<h1>mnemstart </h1>
-		<div>
-			<p>
-				Welcome to mnemstart { user.Name }!
-			</p>
-		</div>
+		<h1>mnemstart</h1>
+		<form action="https://duckduckgo.com" method="get">
+			<input type="text" id="search" name="q" placeholder="Search..."/>
+		</form>
+		<script>
+            let inputSequence = [];
+            const keymaps = {
+                ' gh': 'https://github.com',
+                ' yt': 'https://youtube.com',
+            };
+
+            document.addEventListener('keydown', (event) => {
+                const key = event.key;
+
+                // ignore keypresses when an input is focused
+                const activeElement = document.activeElement;
+                if (activeElement && (activeElement.tagName.toLowerCase() === 'input')) {
+                    return;
+                }
+
+                inputSequence.push(key);
+
+                const longestSequence = Math.max(...Object.keys(keymaps).map(s => s.length));
+
+                if (inputSequence.length > longestSequence) {
+                    inputSequence.shift();
+                }
+
+                const inputString = inputSequence.join('');
+
+                for (const mapping in keymaps) {
+                    if (inputString.endsWith(mapping)) {
+                        window.location.href = keymaps[mapping];
+                        inputSequence = [];
+                        break;
+                    }
+                }
+            });
+
+            // default mappings
+            // 'esc' clears the input sequence and unfocuses any input fields
+            document.addEventListener('keydown', (event) => {
+                if (event.key === 'Escape') {
+                    event.preventDefault();
+                    inputSequence = [];
+                    document.activeElement.blur();
+                }
+            });
+
+            // 'i' focuses the search input - i.e. 'insert mode'
+            document.addEventListener('keydown', (event) => {
+                if (event.key === 'i') {
+                    event.preventDefault();
+                    document.getElementById('search').focus();
+                }
+            });
+        </script>
 	}
 }

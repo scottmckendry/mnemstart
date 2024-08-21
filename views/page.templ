@@ -15,19 +15,14 @@ templ Page(nav bool, user goth.User) {
 			<script src="https://unpkg.com/htmx.org@2.0.2"></script>
 		</head>
 		<body>
-			if nav {
-				<nav>
-					<a href="/">Home</a>
-					if user.Name != "" {
-						<a href={ templ.SafeURL(fmt.Sprintf("/auth/%s/logout", user.Provider)) }>
-							Logout
-						</a>
-						<span>Welcome, { user.Name }</span>
-						<img src={ user.AvatarURL }/>
-					}
-				</nav>
-			}
 			{ children... }
+			if nav {
+				<footer>
+					<a href={ templ.SafeURL(fmt.Sprintf("/auth/%s/logout", user.Provider)) }>
+						Logout
+					</a>
+				</footer>
+			}
 		</body>
 	</html>
 }

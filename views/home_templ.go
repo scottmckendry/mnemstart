@@ -40,20 +40,7 @@ func Home(user goth.User) templ.Component {
 				}()
 			}
 			ctx = templ.InitializeContext(ctx)
-			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<h1>mnemstart </h1><div><p>Welcome to mnemstart ")
-			if templ_7745c5c3_Err != nil {
-				return templ_7745c5c3_Err
-			}
-			var templ_7745c5c3_Var3 string
-			templ_7745c5c3_Var3, templ_7745c5c3_Err = templ.JoinStringErrs(user.Name)
-			if templ_7745c5c3_Err != nil {
-				return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/home.templ`, Line: 10, Col: 36}
-			}
-			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var3))
-			if templ_7745c5c3_Err != nil {
-				return templ_7745c5c3_Err
-			}
-			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("!</p></div>")
+			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<h1>mnemstart</h1><form action=\"https://duckduckgo.com\" method=\"get\"><input type=\"text\" id=\"search\" name=\"q\" placeholder=\"Search...\"></form><script>\r\n            let inputSequence = [];\r\n            const keymaps = {\r\n                ' gh': 'https://github.com',\r\n                ' yt': 'https://youtube.com',\r\n            };\r\n\r\n            document.addEventListener('keydown', (event) => {\r\n                const key = event.key;\r\n\r\n                // ignore keypresses when an input is focused\r\n                const activeElement = document.activeElement;\r\n                if (activeElement && (activeElement.tagName.toLowerCase() === 'input')) {\r\n                    return;\r\n                }\r\n\r\n                inputSequence.push(key);\r\n\r\n                const longestSequence = Math.max(...Object.keys(keymaps).map(s => s.length));\r\n\r\n                if (inputSequence.length > longestSequence) {\r\n                    inputSequence.shift();\r\n                }\r\n\r\n                const inputString = inputSequence.join('');\r\n\r\n                for (const mapping in keymaps) {\r\n                    if (inputString.endsWith(mapping)) {\r\n                        window.location.href = keymaps[mapping];\r\n                        inputSequence = [];\r\n                        break;\r\n                    }\r\n                }\r\n            });\r\n\r\n            // default mappings\r\n            // 'esc' clears the input sequence and unfocuses any input fields\r\n            document.addEventListener('keydown', (event) => {\r\n                if (event.key === 'Escape') {\r\n                    event.preventDefault();\r\n                    inputSequence = [];\r\n                    document.activeElement.blur();\r\n                }\r\n            });\r\n\r\n            // 'i' focuses the search input - i.e. 'insert mode'\r\n            document.addEventListener('keydown', (event) => {\r\n                if (event.key === 'i') {\r\n                    event.preventDefault();\r\n                    document.getElementById('search').focus();\r\n                }\r\n            });\r\n        </script>")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}

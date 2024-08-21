@@ -38,3 +38,12 @@ a {
     text-align: center;
     transition: background-color 0.2s;
 }
+
+footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 1rem;
+    text-align: right;
+}

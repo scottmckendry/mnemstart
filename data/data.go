@@ -19,6 +19,12 @@ type User struct {
 	GithubID  string
 }
 
+type UserSettings struct {
+	Mappings     map[string]string
+	SearchEngine string
+	LeaderKey    string
+}
+
 func NewStore(db *sql.DB) *Storage {
 	return &Storage{
 		db: db,
@@ -106,4 +112,72 @@ func buildUserFromGothUser(gothUser goth.User) *User {
 	}
 
 	return user
+}
+
+func (s *Storage) GetUserSettings(email string) *UserSettings {
+	settings := &UserSettings{}
+	settings.Mappings = getMappings(s.db, email)
+	settings = s.getGenericSettings(email, settings)
+
+	return settings
+}
+
+func getMappings(db *sql.DB, email string) map[string]string {
+	rows, err := db.Query(
+		`SELECT keymap, maps_to
+            FROM mappings
+            INNER JOIN users
+            ON mappings.user_id = users.id
+            WHERE users.email = ?`,
+		email,
+	)
+	if err != nil {
+		return nil
+	}
+	defer rows.Close()
+
+	mappings := make(map[string]string)
+	for rows.Next() {
+		var keymap, mapsTo string
+		err = rows.Scan(&keymap, &mapsTo)
+		if err != nil {
+			return nil
+		}
+
+		mappings[keymap] = mapsTo
+	}
+
+	return mappings
+}
+
+func (s *Storage) getGenericSettings(email string, settings *UserSettings) *UserSettings {
+	rows, err := s.db.Query(
+		`SELECT setting_key, setting_value
+            FROM user_settings
+            INNER JOIN users
+            ON user_settings.user_id = users.id
+            WHERE users.email = ?`,
+		email,
+	)
+	if err != nil {
+		return nil
+	}
+	defer rows.Close()
+
+	for rows.Next() {
+		var key, value string
+		err = rows.Scan(&key, &value)
+		if err != nil {
+			return nil
+		}
+
+		switch key {
+		case "SearchEngine":
+			settings.SearchEngine = value
+		case "LeaderKey":
+			settings.LeaderKey = value
+		}
+	}
+
+	return settings
 }

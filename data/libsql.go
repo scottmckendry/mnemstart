@@ -37,5 +37,29 @@ func generateSchema(db *sql.DB) error {
 		return fmt.Errorf("Error creating users table: %v", err)
 	}
 
+	_, err = db.Exec(`
+        CREATE TABLE IF NOT EXISTS mappings (
+            id INTEGER PRIMARY KEY,
+            user_id INTEGER,
+            keymap TEXT,
+            maps_to TEXT
+        );
+    `)
+	if err != nil {
+		return fmt.Errorf("Error creating mappings table: %v", err)
+	}
+
+	_, err = db.Exec(`
+        CREATE TABLE IF NOT EXISTS user_settings (
+            id INTEGER PRIMARY KEY,
+            user_id INTEGER,
+            setting_key TEXT,
+            setting_value TEXT
+        );
+    `)
+	if err != nil {
+		return fmt.Errorf("Error creating user_settings table: %v", err)
+	}
+
 	return nil
 }

@@ -24,7 +24,8 @@ func NewStore(db *sql.DB) *Storage {
 	}
 }
 
-func (s *Storage) GetOrCreateUser(user *User) error {
+func (s *Storage) CreateUser(gothUser goth.User) error {
+	user := buildUserFromGothUser(gothUser)
 	err := getUser(s.db, user)
 	if err != nil {
 		err = createUser(s.db, user)
@@ -61,7 +62,7 @@ func createUser(db *sql.DB, user *User) error {
 	return nil
 }
 
-func BuildUserFromGothUser(gothUser goth.User) *User {
+func buildUserFromGothUser(gothUser goth.User) *User {
 	user := &User{
 		Name:  gothUser.Name,
 		Email: gothUser.Email,

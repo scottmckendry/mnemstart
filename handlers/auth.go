@@ -9,7 +9,6 @@ import (
 	"github.com/go-chi/chi/v5"
 	"github.com/markbates/goth/gothic"
 
-	"github.com/scottmckendry/mnemstart/data"
 	"github.com/scottmckendry/mnemstart/views"
 )
 
@@ -47,10 +46,7 @@ func (h *Handler) HandleAuthCallbackFunction(w http.ResponseWriter, r *http.Requ
 		return
 	}
 
-	log.Printf("Attempting to get or create user: %v", user)
-	mnemstartUser := data.BuildUserFromGothUser(user)
-	log.Printf("User: %v", mnemstartUser)
-	err = h.store.GetOrCreateUser(mnemstartUser)
+	err = h.store.CreateUser(user)
 	if err != nil {
 		log.Printf("Error getting or creating user: %v", err)
 		return

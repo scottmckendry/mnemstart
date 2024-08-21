@@ -69,8 +69,17 @@ func createUser(db *sql.DB, user *User) error {
 }
 
 func updateUser(db *sql.DB, user *User) error {
-	_, err := db.Exec(
-		"UPDATE users SET name = ?, discord_id = ?, github_id = ? WHERE email = ?",
+	_, err := db.Exec(`
+        UPDATE users
+        SET
+            name = CASE
+                WHEN name IS NULL THEN ?
+                ELSE name
+            END,
+            discord_id = ?,
+            github_id = ?
+        WHERE email = ?
+    `,
 		user.Name,
 		user.DiscordID,
 		user.GithubID,

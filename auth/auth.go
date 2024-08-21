@@ -8,6 +8,7 @@ import (
 	"github.com/gorilla/sessions"
 	"github.com/markbates/goth"
 	"github.com/markbates/goth/gothic"
+	"github.com/markbates/goth/providers/discord"
 	"github.com/markbates/goth/providers/github"
 
 	"github.com/scottmckendry/mnemstart/config"
@@ -22,7 +23,12 @@ func NewAuthService(store sessions.Store) *AuthService {
 		github.New(
 			config.Envs.GithubClientID,
 			config.Envs.GithubClientSecret,
-			buildCallbackURL("github"),
+			buildCallbackURL("github"), "user:email",
+		),
+		discord.New(
+			config.Envs.DiscordClientID,
+			config.Envs.DiscordClientSecret,
+			buildCallbackURL("discord"), "identify", "email",
 		),
 	)
 
@@ -39,6 +45,8 @@ func (a *AuthService) GetSessionUser(r *http.Request) (goth.User, error) {
 	if user == nil {
 		return goth.User{}, fmt.Errorf("user is unauthenticated! %v", user)
 	}
+
+	log.Printf("User session found: %v", user)
 
 	return user.(goth.User), nil
 }
@@ -89,5 +97,10 @@ func RequireAuth(handlerFunc http.HandlerFunc, auth *AuthService) http.HandlerFu
 }
 
 func buildCallbackURL(provider string) string {
-	return fmt.Sprintf("%s:%s/auth/%s/callback", config.Envs.PublicHost, config.Envs.Port, provider)
+	return fmt.Sprintf(
+		"%s:%s/auth/%s/callback",
+		config.Envs.PublicHost,
+		config.Envs.Port,
+		provider,
+	)
 }

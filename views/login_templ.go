@@ -40,7 +40,7 @@ func Login() templ.Component {
 				}()
 			}
 			ctx = templ.InitializeContext(ctx)
-			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<div class=\"login\"><div class=\"login-buttons\"><h2>Login with:</h2><div class=\"login-button\"><icon class=\"fab fa-github\"></icon> <a href=\"/auth/github\">GitHub</a></div></div></div>")
+			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<div class=\"login\"><div class=\"login-buttons\"><h2>Login with:</h2><div class=\"login-button\"><icon class=\"fab fa-github\"></icon> <a href=\"/auth/github\">GitHub</a></div><div class=\"login-button\"><icon class=\"fab fa-discord\"></icon> <a href=\"/auth/discord\">Discord</a></div></div></div>")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}

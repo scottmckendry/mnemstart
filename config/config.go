@@ -22,6 +22,8 @@ type Config struct {
 	CookiesAuthIsHttpOnly   bool
 	GithubClientID          string
 	GithubClientSecret      string
+	DiscordClientID         string
+	DiscordClientSecret     string
 }
 
 var Envs = initConfig()
@@ -42,6 +44,8 @@ func initConfig() *Config {
 		CookiesAuthIsHttpOnly:   getEnvAsBool("COOKIES_AUTH_IS_HTTP_ONLY", true),
 		GithubClientID:          getEnvOrPanic("GITHUB_CLIENT_ID"),
 		GithubClientSecret:      getEnvOrPanic("GITHUB_CLIENT_SECRET"),
+		DiscordClientID:         getEnvOrPanic("DISCORD_CLIENT_ID"),
+		DiscordClientSecret:     getEnvOrPanic("DISCORD_CLIENT_SECRET"),
 	}
 }
 

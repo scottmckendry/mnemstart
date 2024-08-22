@@ -181,3 +181,29 @@ func (s *Storage) getGenericSettings(email string, settings *UserSettings) *User
 
 	return settings
 }
+
+func (s *Storage) UpdateUserSettings(email string, settings *UserSettings) error {
+	settingsMap := map[string]interface{}{
+		"SearchEngine": settings.SearchEngine,
+		"LeaderKey":    settings.LeaderKey,
+	}
+
+	for settingKey, settingValue := range settingsMap {
+		_, err := s.db.Exec(
+			`INSERT OR REPLACE INTO user_settings (user_id, setting_key, setting_value)
+                VALUES (
+                    (SELECT id FROM users WHERE email = ?),
+                    ?,
+                    ?
+                )`,
+			email,
+			settingKey,
+			settingValue,
+		)
+		if err != nil {
+			return err
+		}
+	}
+
+	return nil
+}

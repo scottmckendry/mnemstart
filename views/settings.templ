@@ -1,0 +1,52 @@
+package views
+
+import (
+	"github.com/markbates/goth"
+	"github.com/scottmckendry/mnemstart/data"
+)
+
+templ Settings(user goth.User, settings *data.UserSettings) {
+	<div id="modal" _="on closeModal add .closing then wait for animationend then remove me">
+		<div class="modal-underlay" _="on click trigger closeModal"></div>
+		<div class="modal-content">
+			<h2>Settings</h2>
+			/*
+			<table id="mappings-table">
+				<thead>
+					<tr>
+						<th>Keymap</th>
+						<th>URL</th>
+						<th></th>
+					</tr>
+				</thead>
+				<tbody>
+					for keymap, url := range settings.Mappings {
+						<tr>
+							<td>{ keymap }</td>
+							<td>{ url }</td>
+							<td>
+								<button class="button" hx-delete={ "/delete-mapping/" + keymap } hx-swap="#mappings-table">Delete</button>
+							</td>
+						</tr>
+					}
+					<tr>
+						<td><input type="text" name="keymap" placeholder="Keymap" mapping-include-edit=""/></td>
+						<td><input type="text" name="url" placeholder="URL" mapping-include-edit=""/></td>
+						<td>
+							<button class="button" _="on click trigger addMapping" hx-put="/add-mapping" hx-include="input[mapping-include-edit]" hx-swap="#mappings-table">Add</button>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+            */
+			<label for="leaderKey">Leader Key</label>
+			<input type="text" name="leaderKey" value={ settings.LeaderKey } placeholder="Leader Key" data-include-edit=""/>
+			<label for="searchEngine">Search Engine</label>
+			<input type="text" name="searchEngine" value={ settings.SearchEngine } placeholder="Search Engine" data-include-edit=""/>
+			<div class="action-buttons">
+				<button class="button" _="on click trigger closeModal" hx-put="/update-settings" hx-include="input[data-include-edit]">Save</button>
+				<button class="button" _="on click trigger closeModal">Cancel</button>
+			</div>
+		</div>
+	</div>
+}

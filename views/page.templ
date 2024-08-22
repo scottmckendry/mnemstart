@@ -13,8 +13,10 @@ templ Page(nav bool, user goth.User) {
 			<link rel="stylesheet" href="/public/styles.css"/>
 			<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
 			<script src="https://unpkg.com/htmx.org@2.0.2"></script>
+			<script src="https://unpkg.com/hyperscript.org@0.9.12"></script>
 		</head>
 		<body>
+			<button hx-get="/settings" hx-target="body" hx-swap="beforeend">Settings</button>
 			{ children... }
 			if nav {
 				<footer>

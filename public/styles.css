@@ -1,4 +1,5 @@
 @import "./reset.css";
+@import "./modal.css";
 
 body {
     font-family: "Roboto", sans-serif;

@@ -40,6 +40,8 @@ func main() {
 
 	// app routes
 	r.HandleFunc("/", auth.RequireAuth(handler.HandleRoot, authService))
+	r.HandleFunc("/settings", auth.RequireAuth(handler.HandleSettings, authService))
+	r.HandleFunc("/update-settings", auth.RequireAuth(handler.HandleSettingsUpdate, authService))
 
 	// auth
 	r.HandleFunc("/auth/{provider}", handler.HandleProviderLogin)

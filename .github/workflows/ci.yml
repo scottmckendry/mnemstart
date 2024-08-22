@@ -27,6 +27,7 @@ jobs:
         if: github.ref == 'refs/heads/main'
         outputs:
             release_created: ${{ steps.release-please.outputs.release_created }}
+            tag_name: ${{ steps.release-please.outputs.tag_name }}
         steps:
             - uses: googleapis/release-please-action@v4
               id: release-please
@@ -81,7 +82,7 @@ jobs:
               with:
                   context: .
                   push: ${{ github.event_name != 'pull_request' }}
-                  tags: ghcr.io/scottmckendry/mnemstart:${{ github.event.release.tag_name }}
+                  tags: ghcr.io/scottmckendry/mnemstart:${{ needs.release-please.outputs.tag_name }}
                   labels: ${{ steps.meta.outputs.labels }}
                   cache-from: type=gha
                   cache-to: type=gha,mode=max
@@ -94,7 +95,7 @@ jobs:
             - name: Sign the published Docker image
               env:
                   # https://docs.github.com/en/actions/security-guides/security-hardening-for-github-actions#using-an-intermediate-environment-variable
-                  TAGS: ghcr.io/scottmckendry/mnemstart:${{ github.event.release.tag_name }}
+                  TAGS: ghcr.io/scottmckendry/mnemstart:${{ needs.release-please.outputs.tag_name }}
                   DIGEST: ${{ steps.build-and-push.outputs.digest }}
               # This step uses the identity token to provision an ephemeral certificate
               # against the sigstore community Fulcio instance.

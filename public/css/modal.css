@@ -39,9 +39,8 @@
     max-width: 600px;
 
     /* Display properties for visible dialog*/
-    border: solid 1px #999;
     border-radius: 8px;
-    box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.3);
+    box-shadow: 0px 0px 20px 0px rgba(33, 33, 33, 0.5);
     background-color: #323130;
     padding: 20px;
 
@@ -49,6 +48,11 @@
     animation-name: zoomIn;
     animation-duration: 150ms;
     animation-timing-function: ease;
+}
+
+#modal h2 {
+    margin-bottom: 20px;
+    font-size: 1.5rem;
 }
 
 #modal.closing {
@@ -65,13 +69,48 @@
     animation-timing-function: ease;
 }
 
-#modal input[type="text"] {
-    width: 95%;
-    padding: 5px;
-    font-size: 16px;
-    margin-bottom: 10px;
-    border: 1px solid #fff;
+#modal table {
+    width: 100%;
+    table-layout: fixed;
+    margin-bottom: 20px;
+}
+
+#modal table th {
+    border-bottom: 1px solid #fff;
+    text-align: left;
+}
+
+#modal table td {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+#modal button {
+    padding: 5px 10px;
+    background-color: #555;
+    color: #fff;
+    border: none;
     border-radius: 5px;
+    cursor: pointer;
+}
+
+#modal input {
+    padding: 5px;
+    width: 100%;
+    border-radius: 5px;
+    background-color: #444;
+    outline: none;
+    border: none;
+    color: #fff;
+}
+
+.table-actions {
+    white-space: nowrap;
+}
+
+#modal .action-buttons {
+    margin-top: 20px;
 }
 
 @keyframes fadeIn {

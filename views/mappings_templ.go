@@ -32,7 +32,7 @@ func Mappings(user goth.User, mappings []data.Mapping) templ.Component {
 			templ_7745c5c3_Var1 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<div id=\"modal\" _=\"on closeModal add .closing then wait for animationend then remove me then go to location.reload()\"><div class=\"modal-underlay\" _=\"on click trigger closeModal\"></div><div class=\"modal-content\"><h2>Mappings</h2><table id=\"mappings-table\"><thead><tr><th>Keymap</th><th>URL</th><th>Actions</th></tr></thead> <tbody hx-target=\"closest tr\" hx-swap=\"outerHTML\">")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<div id=\"modal\" _=\"on closeModal add .closing then wait for animationend then remove me then go to location.reload()\"><div class=\"modal-underlay\" _=\"on click trigger closeModal\"></div><div class=\"modal-content\"><h2>Edit key mappings</h2><table id=\"mappings-table\"><thead><tr><th>Keymap</th><th>URL</th><th>Actions</th></tr></thead> <tbody hx-target=\"closest tr\" hx-swap=\"outerHTML\">")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -94,7 +94,7 @@ func MappingRow(mapping *data.Mapping) templ.Component {
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</td><td><button class=\"button\" hx-get=\"")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</td><td class=\"table-actions\"><button class=\"button\" hx-get=\"")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -146,7 +146,7 @@ func NewMapping() templ.Component {
 			templ_7745c5c3_Var7 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<tr><td><input type=\"text\" id=\"keymap\" name=\"keymap\" data-include-add=\"\" required></td><td><input type=\"text\" id=\"mapsto\" name=\"mapsto\" data-include-add=\"\" required></td><td><button class=\"button\" hx-post=\"/mappings/add\" hx-target=\"#mappings-table\" hx-include=\"input[data-include-add]\" hx-swap=\"outerHTML\">Save</button></td></tr>")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<tr><td><input type=\"text\" id=\"keymap\" name=\"keymap\" data-include-add=\"\" required></td><td><input type=\"text\" id=\"mapsto\" name=\"mapsto\" data-include-add=\"\" required></td><td class=\"table-actions\"><button class=\"button\" hx-post=\"/mappings/add\" hx-target=\"#mappings-table\" hx-include=\"input[data-include-add]\" hx-swap=\"outerHTML\">Save</button> <button class=\"button\" hx-get=\"/mappings\" hx-swap=\"outerHTML\">Cancel</button></td></tr>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -179,7 +179,7 @@ func EditMapping(user goth.User, mapping *data.Mapping) templ.Component {
 		var templ_7745c5c3_Var9 string
 		templ_7745c5c3_Var9, templ_7745c5c3_Err = templ.JoinStringErrs("/mappings/" + strconv.Itoa(mapping.ID))
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/mappings.templ`, Line: 76, Col: 89}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/mappings.templ`, Line: 77, Col: 89}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var9))
 		if templ_7745c5c3_Err != nil {
@@ -192,7 +192,7 @@ func EditMapping(user goth.User, mapping *data.Mapping) templ.Component {
 		var templ_7745c5c3_Var10 string
 		templ_7745c5c3_Var10, templ_7745c5c3_Err = templ.JoinStringErrs(mapping.Keymap)
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/mappings.templ`, Line: 78, Col: 91}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/mappings.templ`, Line: 79, Col: 91}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var10))
 		if templ_7745c5c3_Err != nil {
@@ -205,20 +205,20 @@ func EditMapping(user goth.User, mapping *data.Mapping) templ.Component {
 		var templ_7745c5c3_Var11 string
 		templ_7745c5c3_Var11, templ_7745c5c3_Err = templ.JoinStringErrs(mapping.MapsTo)
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/mappings.templ`, Line: 81, Col: 91}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/mappings.templ`, Line: 82, Col: 91}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var11))
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("\" required></td><td><button class=\"button\" hx-put=\"")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("\" required></td><td class=\"table-actions\"><button class=\"button\" hx-put=\"")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
 		var templ_7745c5c3_Var12 string
 		templ_7745c5c3_Var12, templ_7745c5c3_Err = templ.JoinStringErrs("/mappings/update/" + strconv.Itoa(mapping.ID))
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/mappings.templ`, Line: 84, Col: 81}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/mappings.templ`, Line: 85, Col: 81}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var12))
 		if templ_7745c5c3_Err != nil {
@@ -231,7 +231,7 @@ func EditMapping(user goth.User, mapping *data.Mapping) templ.Component {
 		var templ_7745c5c3_Var13 string
 		templ_7745c5c3_Var13, templ_7745c5c3_Err = templ.JoinStringErrs("/mappings/" + strconv.Itoa(mapping.ID))
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/mappings.templ`, Line: 85, Col: 74}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/mappings.templ`, Line: 86, Col: 74}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var13))
 		if templ_7745c5c3_Err != nil {

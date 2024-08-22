@@ -10,7 +10,7 @@ templ Mappings(user goth.User, mappings []data.Mapping) {
 	<div id="modal" _="on closeModal add .closing then wait for animationend then remove me then go to location.reload()">
 		<div class="modal-underlay" _="on click trigger closeModal"></div>
 		<div class="modal-content">
-			<h2>Mappings</h2>
+			<h2>Edit key mappings</h2>
 			<table id="mappings-table">
 				<thead>
 					<tr>
@@ -39,7 +39,7 @@ templ MappingRow(mapping *data.Mapping) {
 	<tr>
 		<td>{ mapping.Keymap }</td>
 		<td>{ mapping.MapsTo }</td>
-		<td>
+		<td class="table-actions">
 			<button
 				class="button"
 				hx-get={ "/mappings/edit/" + strconv.Itoa(mapping.ID) }
@@ -66,8 +66,9 @@ templ NewMapping() {
 		<td>
 			<input type="text" id="mapsto" name="mapsto" data-include-add="" required/>
 		</td>
-		<td>
+		<td class="table-actions">
 			<button class="button" hx-post="/mappings/add" hx-target="#mappings-table" hx-include="input[data-include-add]" hx-swap="outerHTML">Save</button>
+			<button class="button" hx-get="/mappings" hx-swap="outerHTML">Cancel</button>
 		</td>
 	</tr>
 }
@@ -80,7 +81,7 @@ templ EditMapping(user goth.User, mapping *data.Mapping) {
 		<td>
 			<input type="text" id="mapsto" name="mapsto" data-include-edit="" value={ mapping.MapsTo } required/>
 		</td>
-		<td>
+		<td class="table-actions">
 			<button class="button" hx-put={ "/mappings/update/" + strconv.Itoa(mapping.ID) } hx-target="#mappings-table" hx-include="input[data-include-edit]">Save</button>
 			<button class="button" hx-get={ "/mappings/" + strconv.Itoa(mapping.ID) }>Cancel</button>
 		</td>

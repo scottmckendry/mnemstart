@@ -29,16 +29,12 @@ func Page(nav bool, user goth.User) templ.Component {
 			templ_7745c5c3_Var1 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<!doctype html><html lang=\"en\"><head><title>mnemstart</title><meta charset=\"UTF-8\"><meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\"><link rel=\"stylesheet\" href=\"/public/styles.css\"><link rel=\"stylesheet\" href=\"https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css\"><script src=\"https://unpkg.com/htmx.org@2.0.2\"></script><script src=\"https://unpkg.com/hyperscript.org@0.9.12\"></script></head><body><button hx-get=\"/settings\" hx-target=\"body\" hx-swap=\"beforeend\">Settings</button> <button hx-get=\"/mappings\" hx-target=\"body\" hx-swap=\"beforeend\">Mappings</button>")
-		if templ_7745c5c3_Err != nil {
-			return templ_7745c5c3_Err
-		}
-		templ_7745c5c3_Err = templ_7745c5c3_Var1.Render(ctx, templ_7745c5c3_Buffer)
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<!doctype html><html lang=\"en\"><head><title>mnemstart</title><meta charset=\"UTF-8\"><meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\"><link rel=\"stylesheet\" href=\"/public/css/styles.css\"><link rel=\"stylesheet\" href=\"https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css\"><link rel=\"icon\" href=\"data:image/svg+xml,&lt;svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22&gt;&lt;text y=%22.9em%22 font-size=%2290%22&gt;🧠&lt;/text&gt;&lt;/svg&gt;\"><script src=\"https://unpkg.com/htmx.org@2.0.2\"></script><script src=\"https://unpkg.com/hyperscript.org@0.9.12\"></script></head><body>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
 		if nav {
-			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<footer><a href=\"")
+			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<nav><span class=\"fa fa-caret-left navicon caret-rotate\"></span><ul><a href=\"#\" hx-get=\"/mappings\" hx-target=\"body\" hx-swap=\"beforeend\"><li class=\"fa fa-map navicon\"></li></a> <a href=\"#\" hx-get=\"/settings\" hx-target=\"body\" hx-swap=\"beforeend\"><li class=\"fa fa-cog navicon\"></li></a> <a href=\"")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
@@ -47,10 +43,14 @@ func Page(nav bool, user goth.User) templ.Component {
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
-			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("\">Logout</a></footer>")
+			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("\"><li class=\"fa fa-sign-out-alt navicon\"></li></a></ul></nav>")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
+		}
+		templ_7745c5c3_Err = templ_7745c5c3_Var1.Render(ctx, templ_7745c5c3_Buffer)
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</body></html>")
 		if templ_7745c5c3_Err != nil {

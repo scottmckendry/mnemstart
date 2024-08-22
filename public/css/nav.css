@@ -1,0 +1,54 @@
+nav {
+    position: fixed;
+    top: 0;
+    right: 0;
+    z-index: 1000;
+    width: 38px;
+    height: 36px;
+    overflow: hidden;
+    transition: all 0.2s ease-in-out;
+    border-radius: 0 0 3px 0;
+}
+
+nav a,
+nav ul {
+    margin: 0;
+    padding: 0;
+}
+
+nav:hover {
+    width: 38px;
+    height: 160px;
+    transition: all 0.4s ease-in-out;
+}
+
+nav ul {
+    list-style-type: none;
+    margin: 0 0 0 0;
+    transition: all 0.2s ease-in-out;
+}
+
+nav ul li {
+    transition: all 0.2s ease-in-out;
+}
+
+.navicon {
+    padding: 12px 0;
+    width: 40px;
+}
+
+.navicon:before {
+    padding: 12px;
+}
+
+.fa:before {
+    font-size: 16px;
+}
+
+.caret-rotate {
+    transition: all 0.2s ease-in-out;
+}
+
+nav:hover .caret-rotate {
+    transform: rotate(-90deg);
+}

@@ -81,8 +81,8 @@ templ EditMapping(user goth.User, mapping *data.Mapping) {
 			<input type="text" id="mapsto" name="mapsto" data-include-edit="" value={ mapping.MapsTo } required/>
 		</td>
 		<td>
-			<button class="button" hx-get={ "/mappings/" + strconv.Itoa(mapping.ID) }>Cancel</button>
 			<button class="button" hx-put={ "/mappings/update/" + strconv.Itoa(mapping.ID) } hx-target="#mappings-table" hx-include="input[data-include-edit]">Save</button>
+			<button class="button" hx-get={ "/mappings/" + strconv.Itoa(mapping.ID) }>Cancel</button>
 		</td>
 	</tr>
 }

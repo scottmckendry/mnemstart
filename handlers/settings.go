@@ -18,6 +18,17 @@ func (h *Handler) HandleSettings(w http.ResponseWriter, r *http.Request) {
 	views.Settings(user, userSettings).Render(r.Context(), w)
 }
 
+func (h *Handler) HandleMappings(w http.ResponseWriter, r *http.Request) {
+	user, err := h.auth.GetSessionUser(r)
+	if err != nil {
+		log.Println(err)
+		return
+	}
+
+	mappings := h.store.GetMappings(user.Email)
+	views.Mappings(user, mappings).Render(r.Context(), w)
+}
+
 func (h *Handler) HandleSettingsUpdate(w http.ResponseWriter, r *http.Request) {
 	user, err := h.auth.GetSessionUser(r)
 	if err != nil {
@@ -36,6 +47,8 @@ func (h *Handler) HandleSettingsUpdate(w http.ResponseWriter, r *http.Request) {
 	userSettings.SearchEngine = r.FormValue("searchEngine")
 	h.store.UpdateUserSettings(user.Email, userSettings)
 
+	mappings := h.store.GetMappings(user.Email)
+
 	w.Header().Set("HX-Refresh", "true")
-	views.Home(user, userSettings).Render(r.Context(), w)
+	views.Home(user, userSettings, mappings).Render(r.Context(), w)
 }

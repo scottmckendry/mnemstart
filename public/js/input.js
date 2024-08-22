@@ -1,11 +1,14 @@
 let inputSequence = [];
 let leaderMode = false;
 
+const mappingsArray = JSON.parse(
+    document.getElementById("mappings").textContent,
+);
 const userSettings = JSON.parse(
     document.getElementById("userSettings").textContent,
 );
 
-const keymaps = userSettings.Mappings;
+const keymaps = parseMappings(mappingsArray);
 const leaderKey = userSettings.LeaderKey;
 
 document.addEventListener("keydown", (event) => {
@@ -86,3 +89,12 @@ document.addEventListener("keydown", (event) => {
             });
     }
 });
+
+// Parses an array of mappings objects into a dictionary
+function parseMappings(mappingsArray) {
+    const mappings = {};
+    mappingsArray.forEach((mapping) => {
+        mappings[mapping["Keymap"]] = mapping["MapsTo"];
+    });
+    return mappings;
+}

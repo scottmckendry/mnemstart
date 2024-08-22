@@ -5,8 +5,9 @@ import (
 	"github.com/scottmckendry/mnemstart/data"
 )
 
-templ Home(user goth.User, settings *data.UserSettings) {
+templ Home(user goth.User, settings *data.UserSettings, mappings []data.Mapping) {
 	@templ.JSONScript("userSettings", settings)
+	@templ.JSONScript("mappings", mappings)
 	@Page(true, user) {
 		<h1>mnemstart</h1>
 		<form action={ templ.SafeURL(settings.SearchEngine) } method="get">

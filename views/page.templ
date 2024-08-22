@@ -17,6 +17,7 @@ templ Page(nav bool, user goth.User) {
 		</head>
 		<body>
 			<button hx-get="/settings" hx-target="body" hx-swap="beforeend">Settings</button>
+			<button hx-get="/mappings" hx-target="body" hx-swap="beforeend">Mappings</button>
 			{ children... }
 			if nav {
 				<footer>

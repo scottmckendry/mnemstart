@@ -29,7 +29,7 @@ func Page(nav bool, user goth.User) templ.Component {
 			templ_7745c5c3_Var1 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<!doctype html><html lang=\"en\"><head><title>mnemstart</title><meta charset=\"UTF-8\"><meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\"><link rel=\"stylesheet\" href=\"/public/styles.css\"><link rel=\"stylesheet\" href=\"https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css\"><script src=\"https://unpkg.com/htmx.org@2.0.2\"></script><script src=\"https://unpkg.com/hyperscript.org@0.9.12\"></script></head><body><button hx-get=\"/settings\" hx-target=\"body\" hx-swap=\"beforeend\">Settings</button>")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<!doctype html><html lang=\"en\"><head><title>mnemstart</title><meta charset=\"UTF-8\"><meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\"><link rel=\"stylesheet\" href=\"/public/styles.css\"><link rel=\"stylesheet\" href=\"https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css\"><script src=\"https://unpkg.com/htmx.org@2.0.2\"></script><script src=\"https://unpkg.com/hyperscript.org@0.9.12\"></script></head><body><button hx-get=\"/settings\" hx-target=\"body\" hx-swap=\"beforeend\">Settings</button> <button hx-get=\"/mappings\" hx-target=\"body\" hx-swap=\"beforeend\">Mappings</button>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}

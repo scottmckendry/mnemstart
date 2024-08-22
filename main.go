@@ -41,6 +41,7 @@ func main() {
 	// app routes
 	r.HandleFunc("/", auth.RequireAuth(handler.HandleRoot, authService))
 	r.HandleFunc("/settings", auth.RequireAuth(handler.HandleSettings, authService))
+	r.HandleFunc("/mappings", auth.RequireAuth(handler.HandleMappings, authService))
 	r.HandleFunc("/update-settings", auth.RequireAuth(handler.HandleSettingsUpdate, authService))
 
 	// auth

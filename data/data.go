@@ -3,6 +3,7 @@ package data
 import (
 	"database/sql"
 	"fmt"
+	"log"
 
 	"github.com/markbates/goth"
 )
@@ -19,8 +20,13 @@ type User struct {
 	GithubID  string
 }
 
+type Mapping struct {
+	ID     int
+	Keymap string
+	MapsTo string
+}
+
 type UserSettings struct {
-	Mappings     map[string]string
 	SearchEngine string
 	LeaderKey    string
 }
@@ -114,17 +120,10 @@ func buildUserFromGothUser(gothUser goth.User) *User {
 	return user
 }
 
-func (s *Storage) GetUserSettings(email string) *UserSettings {
-	settings := &UserSettings{}
-	settings.Mappings = getMappings(s.db, email)
-	settings = s.getGenericSettings(email, settings)
-
-	return settings
-}
-
-func getMappings(db *sql.DB, email string) map[string]string {
-	rows, err := db.Query(
-		`SELECT keymap, maps_to
+func (s *Storage) GetMappings(email string) []Mapping {
+	mappings := []Mapping{}
+	rows, err := s.db.Query(
+		`SELECT mappings.id, keymap, maps_to
             FROM mappings
             INNER JOIN users
             ON mappings.user_id = users.id
@@ -132,25 +131,26 @@ func getMappings(db *sql.DB, email string) map[string]string {
 		email,
 	)
 	if err != nil {
+		log.Println(err)
 		return nil
 	}
 	defer rows.Close()
 
-	mappings := make(map[string]string)
 	for rows.Next() {
-		var keymap, mapsTo string
-		err = rows.Scan(&keymap, &mapsTo)
+		mapping := Mapping{}
+		err = rows.Scan(&mapping.ID, &mapping.Keymap, &mapping.MapsTo)
 		if err != nil {
 			return nil
 		}
 
-		mappings[keymap] = mapsTo
+		mappings = append(mappings, mapping)
 	}
 
 	return mappings
 }
 
-func (s *Storage) getGenericSettings(email string, settings *UserSettings) *UserSettings {
+func (s *Storage) GetUserSettings(email string) *UserSettings {
+	settings := &UserSettings{}
 	rows, err := s.db.Query(
 		`SELECT setting_key, setting_value
             FROM user_settings

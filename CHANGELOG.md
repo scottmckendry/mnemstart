@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.2](https://github.com/scottmckendry/mnemstart/compare/v0.1.1...v0.1.2) (2024-08-22)
+
+
+### Bug Fixes
+
+* **ci:** add missing env vars ([b08d800](https://github.com/scottmckendry/mnemstart/commit/b08d800fe1cdf619ced0f342127a5a2ed725eb0f))
+
 ## [0.1.1](https://github.com/scottmckendry/mnemstart/compare/v0.1.0...v0.1.1) (2024-08-22)
 
 

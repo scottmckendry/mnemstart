@@ -149,6 +149,83 @@ func (s *Storage) GetMappings(email string) []Mapping {
 	return mappings
 }
 
+func (s *Storage) GetMapping(mappingID string, email string) *Mapping {
+	mapping := &Mapping{}
+	row := s.db.QueryRow(
+		`SELECT mappings.id, keymap, maps_to
+            FROM mappings
+            INNER JOIN users
+            ON mappings.user_id = users.id
+            WHERE mappings.id = ?
+            AND users.email = ?`,
+		mappingID,
+		email,
+	)
+	err := row.Scan(&mapping.ID, &mapping.Keymap, &mapping.MapsTo)
+	if err != nil {
+		return nil
+	}
+
+	return mapping
+}
+
+func (s *Storage) AddMapping(email string, keymap string, mapsTo string) error {
+	_, err := s.db.Exec(
+		`INSERT INTO mappings (user_id, keymap, maps_to)
+            VALUES (
+                (SELECT id FROM users WHERE email = ?),
+                ?,
+                ?
+            )`,
+		email,
+		keymap,
+		mapsTo,
+	)
+	if err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (s *Storage) UpdateMapping(
+	mappingID string,
+	email string,
+	keymap string,
+	mapsTo string,
+) error {
+	_, err := s.db.Exec(
+		`UPDATE mappings
+            SET keymap = ?, maps_to = ?
+            WHERE id = ?
+            AND user_id = (SELECT id FROM users WHERE email = ?)`,
+		keymap,
+		mapsTo,
+		mappingID,
+		email,
+	)
+	if err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (s *Storage) DeleteMapping(mappingID string, email string) error {
+	_, err := s.db.Exec(
+		`DELETE FROM mappings
+            WHERE id = ?
+            AND user_id = (SELECT id FROM users WHERE email = ?)`,
+		mappingID,
+		email,
+	)
+	if err != nil {
+		return err
+	}
+
+	return nil
+}
+
 func (s *Storage) GetUserSettings(email string) *UserSettings {
 	settings := &UserSettings{}
 	rows, err := s.db.Query(

@@ -41,8 +41,20 @@ func main() {
 	// app routes
 	r.HandleFunc("/", auth.RequireAuth(handler.HandleRoot, authService))
 	r.HandleFunc("/settings", auth.RequireAuth(handler.HandleSettings, authService))
-	r.HandleFunc("/mappings", auth.RequireAuth(handler.HandleMappings, authService))
 	r.HandleFunc("/update-settings", auth.RequireAuth(handler.HandleSettingsUpdate, authService))
+	r.HandleFunc("/mappings", auth.RequireAuth(handler.HandleMappings, authService))
+	r.HandleFunc("/mappings/{id}", auth.RequireAuth(handler.HandleMapping, authService))
+	r.HandleFunc("/mappings/new", auth.RequireAuth(handler.HandleMappingNew, authService))
+	r.HandleFunc("/mappings/add", auth.RequireAuth(handler.HandleMappingAdd, authService))
+	r.HandleFunc("/mappings/edit/{id}", auth.RequireAuth(handler.HandleMappingEdit, authService))
+	r.HandleFunc(
+		"/mappings/update/{id}",
+		auth.RequireAuth(handler.HandleMappingUpdate, authService),
+	)
+	r.HandleFunc(
+		"/mappings/delete/{id}",
+		auth.RequireAuth(handler.HandleMappingDelete, authService),
+	)
 
 	// auth
 	r.HandleFunc("/auth/{provider}", handler.HandleProviderLogin)

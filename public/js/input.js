@@ -75,6 +75,11 @@ document.addEventListener("keydown", (event) => {
 
 // 'i' focuses the search input - i.e. 'insert mode'
 document.addEventListener("keydown", (event) => {
+    const activeElement = document.activeElement;
+    if (activeElement && activeElement.tagName.toLowerCase() === "input") {
+        return;
+    }
+
     if (event.key === "i" && !leaderMode) {
         event.preventDefault();
         document.getElementById("search").focus();

@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.3](https://github.com/scottmckendry/mnemstart/compare/v0.1.2...v0.1.3) (2024-08-22)
+
+
+### Bug Fixes
+
+* **ci:** add release please output tag name for image tag ([12c4a9c](https://github.com/scottmckendry/mnemstart/commit/12c4a9cb8e7ca4522f904c11b8c4ccd14c1e143e))
+
 ## [0.1.2](https://github.com/scottmckendry/mnemstart/compare/v0.1.1...v0.1.2) (2024-08-22)
 
 

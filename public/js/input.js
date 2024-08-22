@@ -13,6 +13,7 @@ const leaderKey = userSettings.LeaderKey;
 
 document.addEventListener("keydown", (event) => {
     const key = event.key;
+    setStatus("");
 
     // ignore keypresses when an input is focused
     const activeElement = document.activeElement;
@@ -21,7 +22,7 @@ document.addEventListener("keydown", (event) => {
     }
 
     if (key === leaderKey) {
-        console.log("activating leader mode");
+        setStatus("Listening for key map...");
         leaderMode = true;
         inputSequence = [];
         return;
@@ -39,7 +40,7 @@ document.addEventListener("keydown", (event) => {
         }
 
         const inputString = inputSequence.join("");
-        console.log("inputString:", inputString);
+        setStatus("Listening for key map... " + inputString);
 
         for (const mapping in keymaps) {
             if (inputString.endsWith(mapping)) {
@@ -56,7 +57,7 @@ document.addEventListener("keydown", (event) => {
                 mapping.startsWith(inputString),
             )
         ) {
-            console.log("no match found, exiting leader mode");
+            setStatus("No matching key map found for " + inputString);
             leaderMode = false;
         }
     }
@@ -102,4 +103,8 @@ function parseMappings(mappingsArray) {
         mappings[mapping["Keymap"]] = mapping["MapsTo"];
     });
     return mappings;
+}
+
+function setStatus(status) {
+    document.getElementById("status").textContent = status;
 }

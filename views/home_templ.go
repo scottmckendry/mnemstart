@@ -60,7 +60,7 @@ func Home(user goth.User, settings *data.UserSettings, mappings []data.Mapping) 
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
-			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("\" method=\"get\"><input type=\"text\" id=\"search\" name=\"q\" placeholder=\"Search...\"></form><script src=\"/public/js/input.js\"></script>")
+			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("\" method=\"get\"><input type=\"text\" id=\"search\" name=\"q\" placeholder=\"Search...\"></form><p id=\"status\"></p><script src=\"/public/js/input.js\"></script>")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}

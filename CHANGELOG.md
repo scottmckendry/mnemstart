@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.1](https://github.com/scottmckendry/mnemstart/compare/v0.1.0...v0.1.1) (2024-08-22)
+
+
+### Bug Fixes
+
+* **ci:** check for create release rather than tag ref ([758da32](https://github.com/scottmckendry/mnemstart/commit/758da327938b8dcf60b10cb70f7801a9b3cc69e3))
+
 ## 0.1.0 (2024-08-22)
 
 

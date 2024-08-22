@@ -40,10 +40,11 @@ document.addEventListener("keydown", (event) => {
         }
 
         const inputString = inputSequence.join("");
-        setStatus("Listening for key map... " + inputString);
+        setStatus(inputString);
 
         for (const mapping in keymaps) {
             if (inputString.endsWith(mapping)) {
+                setStatus(mapping + " → " + keymaps[mapping]);
                 window.location.href = keymaps[mapping];
                 inputSequence = [];
                 leaderMode = false;

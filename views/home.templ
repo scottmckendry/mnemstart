@@ -9,11 +9,32 @@ templ Home(user goth.User, settings *data.UserSettings, mappings []data.Mapping)
 	@templ.JSONScript("userSettings", settings)
 	@templ.JSONScript("mappings", mappings)
 	@Page(true, user) {
-		<h1>mnemstart</h1>
-		<form action={ templ.SafeURL(settings.SearchEngine) } method="get">
-			<input type="text" id="search" name="q" placeholder="Search..."/>
-		</form>
+		<div id="main-content">
+			@Clock()
+			<form action={ templ.SafeURL(settings.SearchEngine) } method="get">
+				<input type="text" id="search" name="q" placeholder="Search..."/>
+			</form>
+		</div>
 		<p id="status"></p>
 		<script src="/public/js/input.js"></script>
 	}
+}
+
+templ Clock() {
+	<div id="clock"></div>
+	<div id="date"></div>
+	<script>
+        function updateClock() {
+            const now = new Date();
+            const hours = now.getHours();
+            const minutes = now.getMinutes().toString().padStart(2, '0');
+            document.getElementById("clock").textContent = `${hours}:${minutes}`;
+
+            datestr = now.toLocaleDateString(undefined, { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+            document.getElementById("date").textContent = datestr;
+        }
+
+        setInterval(updateClock, 5000);
+        updateClock();
+    </script>
 }

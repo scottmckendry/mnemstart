@@ -3,7 +3,7 @@
 @import "./nav.css";
 
 body {
-    font-family: "Roboto", sans-serif;
+    font-family: "Noto Sans", sans-serif;
     font-size: 16px;
     line-height: 1.5;
     color: #fff;
@@ -39,4 +39,45 @@ a {
     color: #fff;
     text-align: center;
     transition: background-color 0.2s;
+}
+
+/*main-content is a div containing multiple elements, the div should be centered on the page an elements inside stacked on top of one another.*/
+#main-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+#clock {
+    font-size: 2.5rem;
+}
+
+#date {
+    font-size: 1rem;
+    margin-bottom: 1rem;
+}
+
+#status {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    padding: 0.5rem;
+    font-size: 0.75rem;
+    color: #999;
+}
+
+#search {
+    background-color: transparent;
+    text-align: center;
+    color: #fff;
+    outline: none;
+    border: none;
+    opacity: 0;
+    transition: all 0.2s ease-in-out;
+}
+
+#search:focus {
+    opacity: 1;
 }

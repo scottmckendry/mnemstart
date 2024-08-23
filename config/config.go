@@ -15,6 +15,7 @@ const (
 type Config struct {
 	PublicHost              string
 	Port                    string
+	SendPortInCallback      bool
 	DatabaseURL             string
 	CookiesAuthSecret       string
 	CookiesAuthAgeInSeconds int
@@ -37,6 +38,7 @@ func initConfig() *Config {
 	return &Config{
 		PublicHost:              getEnv("PUBLIC_HOST", "http://localhost"),
 		Port:                    getEnv("PORT", "3000"),
+		SendPortInCallback:      getEnvAsBool("SEND_PORT_IN_CALLBACK", true),
 		DatabaseURL:             getEnv("DATABASE_URL", "file:mnemstart.db"),
 		CookiesAuthSecret:       getEnv("COOKIES_AUTH_SECRET", "youllneverguesswhatthisis"),
 		CookiesAuthAgeInSeconds: getEnvAsInt("COOKIES_AUTH_AGE_IN_SECONDS", thirtyDaysInSeconds),

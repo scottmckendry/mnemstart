@@ -95,10 +95,13 @@ func RequireAuth(handlerFunc http.HandlerFunc, auth *AuthService) http.HandlerFu
 }
 
 func buildCallbackURL(provider string) string {
+	hostUrl := fmt.Sprintf("%s", config.Envs.PublicHost)
+	if config.Envs.SendPortInCallback {
+		hostUrl = fmt.Sprintf("%s:%s", hostUrl, config.Envs.Port)
+	}
 	return fmt.Sprintf(
-		"%s:%s/auth/%s/callback",
-		config.Envs.PublicHost,
-		config.Envs.Port,
+		"%s/auth/%s/callback",
+		hostUrl,
 		provider,
 	)
 }

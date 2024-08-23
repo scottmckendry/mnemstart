@@ -35,6 +35,7 @@ func main() {
 
 	r := chi.NewRouter()
 	r.Use(middleware.Logger)
+	r.Use(middleware.Recoverer)
 
 	handler := handlers.New(store, authService)
 

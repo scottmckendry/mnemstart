@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.3.0](https://github.com/scottmckendry/mnemstart/compare/v0.2.1...v0.3.0) (2024-08-23)
+
+
+### Features
+
+* **auth:** add config opt to send port number in callback urls ([9ed14d9](https://github.com/scottmckendry/mnemstart/commit/9ed14d9f640e3ed2fabad28c8b12027996a23065))
+
 ## [0.2.1](https://github.com/scottmckendry/mnemstart/compare/v0.2.0...v0.2.1) (2024-08-23)
 
 

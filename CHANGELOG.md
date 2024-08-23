@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.2.0](https://github.com/scottmckendry/mnemstart/compare/v0.1.3...v0.2.0) (2024-08-23)
+
+
+### Features
+
+* **ci:** add dockerfile ([3521d47](https://github.com/scottmckendry/mnemstart/commit/3521d47907dab5cbaca198c4d16ee3a165ccad7d))
+
 ## [0.1.3](https://github.com/scottmckendry/mnemstart/compare/v0.1.2...v0.1.3) (2024-08-22)
 
 

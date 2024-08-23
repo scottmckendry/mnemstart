@@ -51,8 +51,14 @@ document.addEventListener("keydown", (event) => {
 
         for (const mapping in keymaps) {
             if (inputString.endsWith(mapping)) {
-                setStatus(mapping + " → " + keymaps[mapping]);
-                window.location.href = keymaps[mapping];
+                try {
+                    url = new URL(keymaps[mapping]);
+                    window.location.href = url;
+                    setStatus(mapping + " → " + keymaps[mapping]);
+                } catch (e) {
+                    setStatus("Invalid URL: " + keymaps[mapping]);
+                    break;
+                }
                 inputSequence = [];
                 leaderMode = false;
                 break;

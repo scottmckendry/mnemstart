@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.2.1](https://github.com/scottmckendry/mnemstart/compare/v0.2.0...v0.2.1) (2024-08-23)
+
+
+### Bug Fixes
+
+* **auth:** rovert sessions package to version supported by goth ([b76f922](https://github.com/scottmckendry/mnemstart/commit/b76f92267a0324e7e564064fec22fa795bb26b94))
+* **ci:** include latest tag for published packages ([717f455](https://github.com/scottmckendry/mnemstart/commit/717f455c68ab98d28f2fe63b1196341f8b0fa476))
+
 ## [0.2.0](https://github.com/scottmckendry/mnemstart/compare/v0.1.3...v0.2.0) (2024-08-23)
 
 

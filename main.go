@@ -38,17 +38,22 @@ func main() {
 
 	handler := handlers.New(store, authService)
 
-	// app routes
-	r.Get("/", auth.RequireAuth(handler.HandleRoot, authService))
-	r.Get("/settings", auth.RequireAuth(handler.HandleSettings, authService))
-	r.Put("/update-settings", auth.RequireAuth(handler.HandleSettingsUpdate, authService))
-	r.Get("/mappings", auth.RequireAuth(handler.HandleMappings, authService))
-	r.Get("/mappings/{id}", auth.RequireAuth(handler.HandleMapping, authService))
-	r.Get("/mappings/new", auth.RequireAuth(handler.HandleMappingNew, authService))
-	r.Post("/mappings/add", auth.RequireAuth(handler.HandleMappingAdd, authService))
-	r.Get("/mappings/edit/{id}", auth.RequireAuth(handler.HandleMappingEdit, authService))
-	r.Put("/mappings/update/{id}", auth.RequireAuth(handler.HandleMappingUpdate, authService))
-	r.Delete("/mappings/delete/{id}", auth.RequireAuth(handler.HandleMappingDelete, authService))
+	r.Group(func(r chi.Router) {
+		// Require authentication for all routes in this group
+		r.Use(auth.RequireAuth(authService))
+
+		// app routes
+		r.Get("/", handler.HandleRoot)
+		r.Get("/settings", handler.HandleSettings)
+		r.Put("/update-settings", handler.HandleSettingsUpdate)
+		r.Get("/mappings", handler.HandleMappings)
+		r.Get("/mappings/{id}", handler.HandleMapping)
+		r.Get("/mappings/new", handler.HandleMappingNew)
+		r.Post("/mappings/add", handler.HandleMappingAdd)
+		r.Get("/mappings/edit/{id}", handler.HandleMappingEdit)
+		r.Put("/mappings/update/{id}", handler.HandleMappingUpdate)
+		r.Delete("/mappings/delete/{id}", handler.HandleMappingDelete)
+	})
 
 	// auth
 	r.Get("/auth/{provider}", handler.HandleProviderLogin)

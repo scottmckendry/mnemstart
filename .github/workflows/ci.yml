@@ -4,7 +4,7 @@ on:
 
 env:
     REGISTRY: ghcr.io
-    IMAGE_NAME: mnemstart
+    IMAGE_NAME: scottmckendry/mnemstart
 
 jobs:
     test:
@@ -73,6 +73,9 @@ jobs:
               uses: docker/metadata-action@v5
               with:
                   images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+                  tags: |
+                      type=raw,value=latest
+                      type=raw,value=${{ needs.release-please.outputs.tag_name }}
 
             # Build and push Docker image with Buildx (don't push on PR)
             # https://github.com/docker/build-push-action
@@ -82,7 +85,7 @@ jobs:
               with:
                   context: .
                   push: ${{ github.event_name != 'pull_request' }}
-                  tags: ghcr.io/scottmckendry/mnemstart:${{ needs.release-please.outputs.tag_name }}
+                  tags: ${{ steps.meta.outputs.tags }}
                   labels: ${{ steps.meta.outputs.labels }}
                   cache-from: type=gha
                   cache-to: type=gha,mode=max

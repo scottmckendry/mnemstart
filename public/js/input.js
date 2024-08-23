@@ -9,7 +9,14 @@ const userSettings = JSON.parse(
 );
 
 const keymaps = parseMappings(mappingsArray);
-const leaderKey = userSettings.LeaderKey;
+let leaderKey = userSettings.LeaderKey;
+
+if (leaderKey.length !== 1) {
+    setStatus(
+        "Invalid leader key. Please set a single character leader key in your settings. Using default leader key.",
+    );
+    leaderKey = " ";
+}
 
 document.addEventListener("keydown", (event) => {
     const key = event.key;

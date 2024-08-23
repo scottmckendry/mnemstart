@@ -1,6 +1,17 @@
-@import "./reset.css";
-@import "./modal.css";
-@import "./nav.css";
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+* {
+    margin: 0;
+}
+
+input,
+button {
+    font: inherit;
+}
 
 body {
     font-family: "Noto Sans", sans-serif;
@@ -80,4 +91,212 @@ a {
 
 #search:focus {
     opacity: 1;
+}
+
+/*nav styles*/
+nav {
+    position: fixed;
+    top: 0;
+    right: 0;
+    z-index: 1000;
+    width: 38px;
+    height: 36px;
+    overflow: hidden;
+    transition: all 0.2s ease-in-out;
+    border-radius: 0 0 3px 0;
+}
+
+nav a,
+nav ul {
+    margin: 0;
+    padding: 0;
+}
+
+nav:hover {
+    width: 38px;
+    height: 160px;
+    transition: all 0.4s ease-in-out;
+}
+
+nav ul {
+    list-style-type: none;
+    margin: 0 0 0 0;
+    transition: all 0.2s ease-in-out;
+}
+
+nav ul li {
+    transition: all 0.2s ease-in-out;
+}
+
+.navicon {
+    padding: 12px 0;
+    width: 40px;
+}
+
+.navicon:before {
+    padding: 12px;
+}
+
+.fa:before {
+    font-size: 16px;
+}
+
+.caret-rotate {
+    transition: all 0.2s ease-in-out;
+}
+
+nav:hover .caret-rotate {
+    transform: rotate(-90deg);
+}
+
+/*modal styles*/
+#modal {
+    /* Underlay covers entire screen. */
+    position: fixed;
+    top: 0px;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+
+    /* Flexbox centers the .modal-content vertically and horizontally */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    /* Animate when opening */
+    animation-name: fadeIn;
+    animation-duration: 150ms;
+    animation-timing-function: ease;
+}
+
+#modal > .modal-underlay {
+    /* underlay takes up the entire viewport. This is only
+	required if you want to click to dismiss the popup */
+    position: absolute;
+    z-index: -1;
+    top: 0px;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+}
+
+#modal > .modal-content {
+    /* Position visible dialog near the top of the window */
+    margin-top: 10vh;
+
+    /* Sizing for visible dialog */
+    width: 80%;
+    max-width: 600px;
+
+    /* Display properties for visible dialog*/
+    border-radius: 8px;
+    box-shadow: 0px 0px 20px 0px rgba(33, 33, 33, 0.5);
+    background-color: #323130;
+    padding: 20px;
+
+    /* Animate when opening */
+    animation-name: zoomIn;
+    animation-duration: 150ms;
+    animation-timing-function: ease;
+}
+
+#modal h2 {
+    margin-bottom: 20px;
+    font-size: 1.5rem;
+}
+
+#modal.closing {
+    /* Animate when closing */
+    animation-name: fadeOut;
+    animation-duration: 150ms;
+    animation-timing-function: ease;
+}
+
+#modal.closing > .modal-content {
+    /* Animate when closing */
+    animation-name: zoomOut;
+    animation-duration: 150ms;
+    animation-timing-function: ease;
+}
+
+#modal table {
+    width: 100%;
+    table-layout: fixed;
+    margin-bottom: 20px;
+}
+
+#modal table th {
+    border-bottom: 1px solid #fff;
+    text-align: left;
+}
+
+#modal table td {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+#modal button {
+    padding: 5px 10px;
+    background-color: #555;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#modal input {
+    padding: 5px;
+    width: 100%;
+    border-radius: 5px;
+    background-color: #444;
+    outline: none;
+    border: none;
+    color: #fff;
+}
+
+.table-actions {
+    white-space: nowrap;
+}
+
+#modal .action-buttons {
+    margin-top: 20px;
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+@keyframes fadeOut {
+    0% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
+}
+
+@keyframes zoomIn {
+    0% {
+        transform: scale(0.9);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+@keyframes zoomOut {
+    0% {
+        transform: scale(1);
+    }
+    100% {
+        transform: scale(0.9);
+    }
 }

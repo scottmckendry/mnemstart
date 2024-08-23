@@ -39,36 +39,28 @@ func main() {
 	handler := handlers.New(store, authService)
 
 	// app routes
-	r.HandleFunc("/", auth.RequireAuth(handler.HandleRoot, authService))
-	r.HandleFunc("/settings", auth.RequireAuth(handler.HandleSettings, authService))
-	r.HandleFunc("/update-settings", auth.RequireAuth(handler.HandleSettingsUpdate, authService))
-	r.HandleFunc("/mappings", auth.RequireAuth(handler.HandleMappings, authService))
-	r.HandleFunc("/mappings/{id}", auth.RequireAuth(handler.HandleMapping, authService))
-	r.HandleFunc("/mappings/new", auth.RequireAuth(handler.HandleMappingNew, authService))
-	r.HandleFunc("/mappings/add", auth.RequireAuth(handler.HandleMappingAdd, authService))
-	r.HandleFunc("/mappings/edit/{id}", auth.RequireAuth(handler.HandleMappingEdit, authService))
-	r.HandleFunc(
-		"/mappings/update/{id}",
-		auth.RequireAuth(handler.HandleMappingUpdate, authService),
-	)
-	r.HandleFunc(
-		"/mappings/delete/{id}",
-		auth.RequireAuth(handler.HandleMappingDelete, authService),
-	)
+	r.Get("/", auth.RequireAuth(handler.HandleRoot, authService))
+	r.Get("/settings", auth.RequireAuth(handler.HandleSettings, authService))
+	r.Put("/update-settings", auth.RequireAuth(handler.HandleSettingsUpdate, authService))
+	r.Get("/mappings", auth.RequireAuth(handler.HandleMappings, authService))
+	r.Get("/mappings/{id}", auth.RequireAuth(handler.HandleMapping, authService))
+	r.Get("/mappings/new", auth.RequireAuth(handler.HandleMappingNew, authService))
+	r.Post("/mappings/add", auth.RequireAuth(handler.HandleMappingAdd, authService))
+	r.Get("/mappings/edit/{id}", auth.RequireAuth(handler.HandleMappingEdit, authService))
+	r.Put("/mappings/update/{id}", auth.RequireAuth(handler.HandleMappingUpdate, authService))
+	r.Delete("/mappings/delete/{id}", auth.RequireAuth(handler.HandleMappingDelete, authService))
 
 	// auth
-	r.HandleFunc("/auth/{provider}", handler.HandleProviderLogin)
-	r.HandleFunc("/auth/{provider}/callback", handler.HandleAuthCallbackFunction)
-	r.HandleFunc("/auth/{provider}/logout", handler.HandleLogout)
-	r.HandleFunc("/login", handler.HandleLogin)
+	r.Get("/auth/{provider}", handler.HandleProviderLogin)
+	r.Get("/auth/{provider}/callback", handler.HandleAuthCallbackFunction)
+	r.Get("/auth/{provider}/logout", handler.HandleLogout)
+	r.Get("/login", handler.HandleLogin)
 
 	// static content
 	r.Handle("/public/*", http.StripPrefix("/public/", http.FileServer(http.Dir("public"))))
 
 	log.Printf("Server: Listening on %s:%s", config.Envs.PublicHost, config.Envs.Port)
-	log.Fatal(
-		http.ListenAndServe(fmt.Sprintf(":%s", config.Envs.Port), r),
-	)
+	log.Fatal(http.ListenAndServe(fmt.Sprintf(":%s", config.Envs.Port), r))
 }
 
 func initStorage(db *sql.DB) {

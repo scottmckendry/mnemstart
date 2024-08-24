@@ -292,6 +292,9 @@ func (s *Storage) UpdateUserSettings(email string, settings *UserSettings) error
 			settingKey,
 			settingValue,
 		)
+		if err != nil {
+			return err
+		}
 	}
 
 	return nil

@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.6.0](https://github.com/scottmckendry/mnemstart/compare/v0.5.0...v0.6.0) (2024-08-24)
+
+
+### Features
+
+* **auth:** add google & gitlab auth providers ([f30ba9b](https://github.com/scottmckendry/mnemstart/commit/f30ba9bee3260cc314a52eb1aa9a1b28a797f87e))
+* **ui:** update login page look and application icons ([994176a](https://github.com/scottmckendry/mnemstart/commit/994176aa8327ce3ac6726769dee8d3dc5307d29d))
+
 ## [0.5.0](https://github.com/scottmckendry/mnemstart/compare/v0.4.1...v0.5.0) (2024-08-24)
 
 

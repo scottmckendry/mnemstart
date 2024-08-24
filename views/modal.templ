@@ -1,0 +1,20 @@
+package views
+
+templ Modal() {
+	<div
+		id="modal"
+		_="on closeModal add .closing then wait for animationend then remove me"
+	>
+		<div class="modal-underlay" _="on click trigger closeModal"></div>
+		<div class="modal-content">
+			{ children... }
+		</div>
+	</div>
+	<script>
+        document.addEventListener('keydown', function(event) {
+            if (event.key === "Escape") {
+                document.getElementById('modal').dispatchEvent(new Event('closeModal'));
+            }
+        });
+    </script>
+}

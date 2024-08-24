@@ -1,6 +1,7 @@
 package auth
 
 import (
+	"encoding/gob"
 	"fmt"
 	"log"
 	"net/http"
@@ -10,11 +11,17 @@ import (
 	"github.com/markbates/goth/gothic"
 	"github.com/markbates/goth/providers/discord"
 	"github.com/markbates/goth/providers/github"
+	"github.com/markbates/goth/providers/gitlab"
+	"github.com/markbates/goth/providers/google"
 
 	"github.com/scottmckendry/mnemstart/config"
 )
 
 type AuthService struct{}
+
+func init() {
+	gob.Register(map[string]interface{}{})
+}
 
 func NewAuthService(store sessions.Store) *AuthService {
 	gothic.Store = store
@@ -29,6 +36,16 @@ func NewAuthService(store sessions.Store) *AuthService {
 			config.Envs.DiscordClientID,
 			config.Envs.DiscordClientSecret,
 			buildCallbackURL("discord"), "identify", "email",
+		),
+		google.New(
+			config.Envs.GoogleClientID,
+			config.Envs.GoogleClientSecret,
+			buildCallbackURL("google"), "email", "profile",
+		),
+		gitlab.New(
+			config.Envs.GitlabClientID,
+			config.Envs.GitlabClientSecret,
+			buildCallbackURL("gitlab"), "read_user", "email",
 		),
 	)
 

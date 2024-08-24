@@ -23,27 +23,6 @@ func TestGetEnv(t *testing.T) {
 	})
 }
 
-func TestGetEnvOrPanic(t *testing.T) {
-	os.Setenv("TEST_ENV", "test_value")
-
-	result := getEnvOrPanic("TEST_ENV")
-	if result != "test_value" {
-		t.Errorf("Expected 'test_value', got '%s'", result)
-	}
-
-	defer func() {
-		if r := recover(); r == nil {
-			t.Errorf("Expected a panic for non-existent environment variable")
-		}
-	}()
-
-	getEnvOrPanic("NON_EXISTENT_ENV")
-
-	t.Cleanup(func() {
-		os.Unsetenv("TEST_ENV")
-	})
-}
-
 func TestGetEnvAsInt(t *testing.T) {
 	os.Setenv("TEST_ENV", "123")
 

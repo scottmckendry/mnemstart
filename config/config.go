@@ -26,6 +26,10 @@ type Config struct {
 	GithubClientSecret      string
 	DiscordClientID         string
 	DiscordClientSecret     string
+	GoogleClientID          string
+	GoogleClientSecret      string
+	GitlabClientID          string
+	GitlabClientSecret      string
 }
 
 var Envs = initConfig()
@@ -33,13 +37,7 @@ var Envs = initConfig()
 func initConfig() *Config {
 	err := godotenv.Load()
 	if err != nil {
-		log.Print("Error loading .env file")
-		log.Println("Creating empty .env file, with default values for required variables")
-		createEmptyEnvFile()
-		err = godotenv.Load()
-		if err != nil {
-			log.Fatal("Error loading .env file")
-		}
+		log.Print("No .env file found. Using default environment variables.")
 	}
 
 	return &Config{
@@ -51,10 +49,14 @@ func initConfig() *Config {
 		CookiesAuthAgeInSeconds: getEnvAsInt("COOKIES_AUTH_AGE_IN_SECONDS", thirtyDaysInSeconds),
 		CookiesAuthIsSecure:     getEnvAsBool("COOKIES_AUTH_IS_SECURE", false),
 		CookiesAuthIsHttpOnly:   getEnvAsBool("COOKIES_AUTH_IS_HTTP_ONLY", true),
-		GithubClientID:          getEnvOrPanic("GITHUB_CLIENT_ID"),
-		GithubClientSecret:      getEnvOrPanic("GITHUB_CLIENT_SECRET"),
-		DiscordClientID:         getEnvOrPanic("DISCORD_CLIENT_ID"),
-		DiscordClientSecret:     getEnvOrPanic("DISCORD_CLIENT_SECRET"),
+		GithubClientID:          getEnv("GITHUB_CLIENT_ID", ""),
+		GithubClientSecret:      getEnv("GITHUB_CLIENT_SECRET", ""),
+		DiscordClientID:         getEnv("DISCORD_CLIENT_ID", ""),
+		DiscordClientSecret:     getEnv("DISCORD_CLIENT_SECRET", ""),
+		GoogleClientID:          getEnv("GOOGLE_CLIENT_ID", ""),
+		GoogleClientSecret:      getEnv("GOOGLE_CLIENT_SECRET", ""),
+		GitlabClientID:          getEnv("GITLAB_CLIENT_ID", ""),
+		GitlabClientSecret:      getEnv("GITLAB_CLIENT_SECRET", ""),
 	}
 }
 
@@ -63,13 +65,6 @@ func getEnv(key, fallback string) string {
 		return value
 	}
 	return fallback
-}
-
-func getEnvOrPanic(key string) string {
-	if value, ok := os.LookupEnv(key); ok {
-		return value
-	}
-	panic("Missing required environment variable: " + key)
 }
 
 func getEnvAsInt(key string, fallback int) int {
@@ -88,19 +83,4 @@ func getEnvAsBool(key string, fallback bool) bool {
 		}
 	}
 	return fallback
-}
-
-func createEmptyEnvFile() {
-	f, err := os.Create(".env")
-	if err != nil {
-		log.Fatal(err)
-	}
-	defer f.Close()
-
-	_, err = f.WriteString(
-		"GITHUB_CLIENT_ID=\nGITHUB_CLIENT_SECRET=\nDISCORD_CLIENT_ID=\nDISCORD_CLIENT_SECRET=\n",
-	)
-	if err != nil {
-		log.Fatal(err)
-	}
 }

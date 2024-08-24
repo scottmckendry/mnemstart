@@ -18,6 +18,8 @@ type User struct {
 	Email     string
 	DiscordID string
 	GithubID  string
+	GoogleID  string
+	GitlabID  string
 }
 
 type Mapping struct {
@@ -62,12 +64,27 @@ func appendProviderID(provider string, userId string, user *User) {
 		user.DiscordID = userId
 	case "github":
 		user.GithubID = userId
+	case "google":
+		user.GoogleID = userId
+	case "gitlab":
+		user.GitlabID = userId
 	}
 }
 
 func getUser(db *sql.DB, user *User) error {
-	row := db.QueryRow("SELECT * FROM users WHERE email = ?", user.Email)
-	err := row.Scan(&user.ID, &user.Name, &user.Email, &user.DiscordID, &user.GithubID)
+	row := db.QueryRow(
+		"SELECT id, name, email, discord_id, github_id, google_id, gitlab_id FROM users WHERE email = ?",
+		user.Email,
+	)
+	err := row.Scan(
+		&user.ID,
+		&user.Name,
+		&user.Email,
+		&user.DiscordID,
+		&user.GithubID,
+		&user.GoogleID,
+		&user.GitlabID,
+	)
 	if err != nil {
 		return err
 	}
@@ -77,11 +94,13 @@ func getUser(db *sql.DB, user *User) error {
 
 func createUser(db *sql.DB, user *User) error {
 	_, err := db.Exec(
-		"INSERT INTO users (name, email, discord_id, github_id) VALUES (?, ?, ?, ?)",
+		"INSERT INTO users (name, email, discord_id, github_id, google_id, gitlab_id) VALUES (?, ?, ?, ?, ?, ?)",
 		user.Name,
 		user.Email,
 		user.DiscordID,
 		user.GithubID,
+		user.GoogleID,
+		user.GitlabID,
 	)
 	if err != nil {
 		return err
@@ -99,12 +118,16 @@ func updateUser(db *sql.DB, user *User) error {
                 ELSE name
             END,
             discord_id = ?,
-            github_id = ?
+            github_id = ?,
+            google_id = ?,
+            gitlab_id = ?
         WHERE email = ?
     `,
 		user.Name,
 		user.DiscordID,
 		user.GithubID,
+		user.GoogleID,
+		user.GitlabID,
 		user.Email,
 	)
 	if err != nil {

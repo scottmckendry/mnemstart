@@ -30,7 +30,9 @@ func generateSchema(db *sql.DB) error {
             name TEXT,
             email TEXT,
             discord_id TEXT,
-            github_id TEXT
+            github_id TEXT,
+            google_id TEXT,
+            gitlab_id TEXT
         );
     `)
 	if err != nil {

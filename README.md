@@ -41,6 +41,14 @@ Some reasons you might want to self-host mnemstart:
 
 Luckily, self-hosting mnemstart is easy. The whole application (including the database) is contained in a single Docker container. You can run it on any machine that has Docker installed.
 
+> [!IMPORTANT]
+> To self-host mnemstart, you will need to register a new OAuth application with at least one of the supported providers:
+>
+> -   [GitHub](https://docs.github.com/en/apps/oauth-apps/building-oauth-apps/creating-an-oauth-app)
+> -   [Discord](https://discord.com/developers/docs/topics/oauth2)
+> -   [Google](https://developers.google.com/identity/protocols/oauth2)
+> -   [GitLab](https://docs.gitlab.com/ee/integration/oauth_provider.html)
+
 ### 🐋 Using Docker Compose
 
 1. Register a new OAuth application with GitHub and/or Discord. You will need to provide a callback URL in the format `https://your-domain.com[:PORT]/auth/[provider]/callback` where `[provider]` is either `github` or `discord`. Make a note of the client ID and client secret.
@@ -48,11 +56,15 @@ Luckily, self-hosting mnemstart is easy. The whole application (including the da
 3. In the empty directory, create an `.env` file with the following contents:
 
 ```env
-# Required - replace with your own values
+# Required - at least one OAuth provider is required
 GITHUB_CLIENT_ID=your-github-client-id
 GITHUB_CLIENT_SECRET=your-github-client-secret
 DISCORD_CLIENT_ID=your-discord-client-id
 DISCORD_CLIENT_SECRET=your-discord-client-secret
+GOOGLE_CLIENT_ID=your-google-client-id
+GOOGLE_CLIENT_SECRET=your-google-client-secret
+GITLAB_CLIENT_ID=your-gitlab-client-id
+GITLAB_CLIENT_SECRET=your-gitlab-client-secret
 
 # Optional
 PUBLIC_HOST=https://your-domain.com # Defaults to http://localhost
@@ -90,19 +102,7 @@ services:
 ### 🐋 Using Docker (Recommended)
 
 1. Clone the repository and navigate to the root directory.
-2. Create an `.env` file with the following contents:
-
-```env
-GITHUB_CLIENT_ID=your-github-client-id
-GITHUB_CLIENT_SECRET=your-github-client-secret
-DISCORD_CLIENT_ID=your-discord-client-id
-DISCORD_CLIENT_SECRET=your-discord-client-secret
-```
-
-> [!NOTE]
-> Only one valid OAuth provider is required to run the application. You can leave the other provider's client ID and secret blank if you wish.
-> Documentation for registering a new OAuth application with GitHub can be found [here](https://docs.github.com/en/developers/apps/building-oauth-apps/creating-an-oauth-app) and Discord [here](https://discord.com/developers/docs/topics/oauth2).
-
+2. Create an `.env` file and populate at least one OAuth provider. See the example above in **Self-Hosting**.
 3. Run `docker-compose up` to start the development server. The application will be available at `http://localhost:3000`.
 
 ### 🚀 Without Docker
@@ -116,7 +116,7 @@ DISCORD_CLIENT_SECRET=your-discord-client-secret
 **Steps:**
 
 1. Clone the repository and navigate to the root directory.
-2. Create an `.env` file - see above for contents.
+2. Create an `.env` file with an OAuth provider. See the example above in **Self-Hosting**.
 3. Run `templ generate` to ensure all `_templ.go` files are up to date.
 4. Run `air` to start the development server. The application will be available at `http://localhost:3000`.
 

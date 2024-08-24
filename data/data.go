@@ -271,7 +271,18 @@ func (s *Storage) UpdateUserSettings(email string, settings *UserSettings) error
 
 	for settingKey, settingValue := range settingsMap {
 		_, err := s.db.Exec(
-			`INSERT OR REPLACE INTO user_settings (user_id, setting_key, setting_value)
+			`Delete from user_settings
+                WHERE user_id = (SELECT id FROM users WHERE email = ?)
+                AND setting_key = ?`,
+			email,
+			settingKey,
+		)
+		if err != nil {
+			return err
+		}
+
+		_, err = s.db.Exec(
+			`INSERT INTO user_settings (user_id, setting_key, setting_value)
                 VALUES (
                     (SELECT id FROM users WHERE email = ?),
                     ?,
@@ -281,9 +292,6 @@ func (s *Storage) UpdateUserSettings(email string, settings *UserSettings) error
 			settingKey,
 			settingValue,
 		)
-		if err != nil {
-			return err
-		}
 	}
 
 	return nil

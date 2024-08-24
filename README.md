@@ -1,6 +1,8 @@
 # 🧠 mnemstart
 
-**_A minimal browser start page built around vim-inspired mnemonic shortcuts._**
+**_Mnemstart (pronounced "mem-start" as in mnemonic) is a minimal browser start page built around vim-inspired mnemonic shortcuts._**
+
+![demo](https://github.com/user-attachments/assets/06b09770-a858-49fe-88e9-60d5c3914e43)
 
 ## 🚀 Quick Start
 

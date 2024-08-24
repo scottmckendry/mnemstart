@@ -1,5 +1,23 @@
 # Changelog
 
+## [0.4.0](https://github.com/scottmckendry/mnemstart/compare/v0.3.0...v0.4.0) (2024-08-24)
+
+
+### Features
+
+* **api:** add recoverer middleware to gracefully handle panics ([9e88d8d](https://github.com/scottmckendry/mnemstart/commit/9e88d8dc1e5799a673e94dc94dec57aa00005014))
+* **api:** explicitly set methods for routes ([b6b66c2](https://github.com/scottmckendry/mnemstart/commit/b6b66c2d329af6210c08f6cb38b8ad3743d3437b))
+* **auth:** convert auth service to chi middleware ([86597c5](https://github.com/scottmckendry/mnemstart/commit/86597c5e21641f926e60c7bd8902f15795136fd6))
+* **cd:** add deployment job to pipeline to update sever image ([a7f981b](https://github.com/scottmckendry/mnemstart/commit/a7f981b58057b1164fb0a2d1e38019c55f20eb47))
+* **ci:** publish test results to summary ([e3a00b3](https://github.com/scottmckendry/mnemstart/commit/e3a00b3828a11433af20d9b3fa93f1f6eec90075))
+* **keymaps:** show status for incorrectly set leader key ([99f2f96](https://github.com/scottmckendry/mnemstart/commit/99f2f96a1038f5db1b10d3ae4756590420a92cc7))
+
+
+### Bug Fixes
+
+* **data:** resolve provider merge bug ([b9f38f0](https://github.com/scottmckendry/mnemstart/commit/b9f38f0f2d37457853d21b671ebe78cffd365cb1))
+* **keymaps:** sanitize keymap urls before navigating ([a9a389b](https://github.com/scottmckendry/mnemstart/commit/a9a389bac364f53f6c87157399d9e1ff9eb14ab2))
+
 ## [0.3.0](https://github.com/scottmckendry/mnemstart/compare/v0.2.1...v0.3.0) (2024-08-23)
 
 

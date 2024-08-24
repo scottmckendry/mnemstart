@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.4.1](https://github.com/scottmckendry/mnemstart/compare/v0.4.0...v0.4.1) (2024-08-24)
+
+
+### Bug Fixes
+
+* **settings:** resolve sql bug resulting in duplicated settings ([e191dd5](https://github.com/scottmckendry/mnemstart/commit/e191dd57db2d3a54cfd9866b50239004e8b8d5ad))
+
 ## [0.4.0](https://github.com/scottmckendry/mnemstart/compare/v0.3.0...v0.4.0) (2024-08-24)
 
 

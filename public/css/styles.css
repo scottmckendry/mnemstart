@@ -245,11 +245,6 @@ nav:hover .caret-rotate {
     animation-timing-function: ease;
 }
 
-#modal h2 {
-    margin-bottom: 20px;
-    font-size: 1.5rem;
-}
-
 #modal.closing {
     /* Animate when closing */
     animation-name: fadeOut;
@@ -264,21 +259,39 @@ nav:hover .caret-rotate {
     animation-timing-function: ease;
 }
 
-#modal table {
-    width: 100%;
-    table-layout: fixed;
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     margin-bottom: 20px;
 }
 
+.modal-header h2 {
+    font-size: 1.5rem;
+}
+
+.modal-close {
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+#modal table {
+    width: 100%;
+    table-layout: auto;
+    margin-bottom: 20px;
+    border-collapse: collapse;
+}
+
 #modal table th {
-    border-bottom: 1px solid #fff;
     text-align: left;
+    border-bottom: 1px solid #555;
 }
 
 #modal table td {
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
+    max-width: 200px;
 }
 
 #modal button {
@@ -302,6 +315,17 @@ nav:hover .caret-rotate {
 
 .table-actions {
     white-space: nowrap;
+    padding: 3px 0;
+    display: flex;
+    justify-content: right;
+}
+
+.table-actions button {
+    margin-left: 5px;
+}
+
+.add-button {
+    margin-top: 10px;
 }
 
 #modal .action-buttons {

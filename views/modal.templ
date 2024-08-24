@@ -1,12 +1,18 @@
 package views
 
-templ Modal() {
+templ Modal(title string) {
 	<div
 		id="modal"
 		_="on closeModal add .closing then wait for animationend then remove me"
 	>
 		<div class="modal-underlay" _="on click trigger closeModal"></div>
 		<div class="modal-content">
+			<div class="modal-header">
+				<h2>{ title }</h2>
+				<a class="modal-close" _="on click trigger closeModal">
+					<icon class="bx bx-x"></icon>
+				</a>
+			</div>
 			{ children... }
 		</div>
 	</div>

@@ -7,14 +7,13 @@ import (
 )
 
 templ Mappings(user goth.User, mappings []data.Mapping) {
-	@Modal() {
-		<h2>Edit key mappings</h2>
+	@Modal("Edit key mappings") {
 		<table id="mappings-table">
 			<thead>
 				<tr>
 					<th>Keymap</th>
 					<th>URL</th>
-					<th>Actions</th>
+					<th></th>
 				</tr>
 			</thead>
 			<tbody hx-target="closest tr" hx-swap="outerHTML">
@@ -23,12 +22,13 @@ templ Mappings(user goth.User, mappings []data.Mapping) {
 				}
 				<tr>
 					<td colspan="3">
-						<button class="button" hx-get="/mappings/new" hx-swap="outerHTML">New Mapping</button>
+						<button class="add-button" hx-get="/mappings/new" hx-swap="outerHTML">
+							<icon class="bx bx-plus"></icon>
+						</button>
 					</td>
 				</tr>
 			</tbody>
 		</table>
-		<button class="button" _="on click trigger closeModal">Close</button>
 	}
 }
 
@@ -49,8 +49,10 @@ templ MappingRow(mapping *data.Mapping) {
                         } else {
                         htmx.trigger(this, 'edit')
                     }"
-			>Edit</button>
-			<button class="button" hx-delete={ "/mappings/delete/" + strconv.Itoa(mapping.ID) } hx-confirm="Are you sure?" hx-target="#mappings-table">Delete</button>
+			><icon class="bx bx-edit"></icon></button>
+			<button class="button" hx-delete={ "/mappings/delete/" + strconv.Itoa(mapping.ID) } hx-confirm="Are you sure?" hx-target="#mappings-table">
+				<icon class="bx bx-trash"></icon>
+			</button>
 		</td>
 	</tr>
 }
@@ -64,8 +66,12 @@ templ NewMapping() {
 			<input type="text" id="mapsto" name="mapsto" data-include-add="" required/>
 		</td>
 		<td class="table-actions">
-			<button class="button" hx-post="/mappings/add" hx-target="#mappings-table" hx-include="input[data-include-add]" hx-swap="outerHTML">Save</button>
-			<button class="button" hx-get="/mappings" hx-swap="outerHTML">Cancel</button>
+			<button class="button" hx-post="/mappings/add" hx-target="#mappings-table" hx-include="input[data-include-add]" hx-swap="outerHTML">
+				<icon class="bx bx-save"></icon>
+			</button>
+			<button class="button" hx-get="/mappings" hx-swap="outerHTML">
+				<icon class="bx bx-x"></icon>
+			</button>
 		</td>
 	</tr>
 }
@@ -79,8 +85,12 @@ templ EditMapping(user goth.User, mapping *data.Mapping) {
 			<input type="text" id="mapsto" name="mapsto" data-include-edit="" value={ mapping.MapsTo } required/>
 		</td>
 		<td class="table-actions">
-			<button class="button" hx-put={ "/mappings/update/" + strconv.Itoa(mapping.ID) } hx-target="#mappings-table" hx-include="input[data-include-edit]">Save</button>
-			<button class="button" hx-get={ "/mappings/" + strconv.Itoa(mapping.ID) }>Cancel</button>
+			<button class="button" hx-put={ "/mappings/update/" + strconv.Itoa(mapping.ID) } hx-target="#mappings-table" hx-include="input[data-include-edit]">
+				<icon class="bx bx-save"></icon>
+			</button>
+			<button class="button" hx-get={ "/mappings/" + strconv.Itoa(mapping.ID) }>
+				<icon class="bx bx-x"></icon>
+			</button>
 		</td>
 	</tr>
 }

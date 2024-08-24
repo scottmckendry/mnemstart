@@ -5,18 +5,28 @@ import "github.com/markbates/goth"
 templ Login() {
 	@Page(false, goth.User{}) {
 		<div class="login">
-			<div class="login-buttons">
-				<h2>Login with:</h2>
-				<div class="login-button">
-					<icon class="fab fa-github"></icon>
+			<div class="login-container">
+				<h2>Continue with</h2>
+				<div class="login-buttons">
 					<a href="/auth/github">
-						GitHub
+						<div class="login-button github">
+							<icon class="bx bxl-github button-logo"></icon>
+						</div>
 					</a>
-				</div>
-				<div class="login-button">
-					<icon class="fab fa-discord"></icon>
 					<a href="/auth/discord">
-						Discord
+						<div class="login-button discord">
+							<icon class="bx bxl-discord-alt button-logo"></icon>
+						</div>
+					</a>
+					<a href="/auth/google">
+						<div class="login-button google">
+							<icon class="bx bxl-google button-logo"></icon>
+						</div>
+					</a>
+					<a href="/auth/gitlab">
+						<div class="login-button gitlab">
+							<icon class="bx bxl-gitlab button-logo"></icon>
+						</div>
 					</a>
 				</div>
 			</div>

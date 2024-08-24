@@ -33,23 +33,66 @@ a {
     height: 100vh;
 }
 
-.login-buttons {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
+.login-container {
     border: 1px solid #555;
     border-radius: 0.5rem;
     padding: 2rem;
+    width: 300px;
+}
+
+.login-container h2 {
+    margin-bottom: 1rem;
+    font-size: 1.5rem;
+    text-align: center;
+}
+
+.login-buttons {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 0 0.5rem;
 }
 
 .login-button {
-    display: block;
-    padding: 0.75rem;
+    display: flex;
+    flex-direction: row;
+    height: 2.5rem;
+    width: 2.5rem;
     border-radius: 0.25rem;
-    background-color: #555;
     color: #fff;
-    text-align: center;
-    transition: background-color 0.2s;
+}
+
+.button-logo {
+    font-size: 2rem;
+    padding: 0.25rem;
+    flex: initial;
+    position: relative;
+    justify-content: center;
+    align-items: center;
+}
+
+.login-button-text {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex: 1;
+    padding-right: 5px;
+}
+
+.github {
+    background-color: #333;
+}
+
+.discord {
+    background-color: #7289da;
+}
+
+.google {
+    background-color: #4285f4;
+}
+
+.gitlab {
+    background-color: #fc6d26;
 }
 
 /*main-content is a div containing multiple elements, the div should be centered on the page an elements inside stacked on top of one another.*/
@@ -137,7 +180,7 @@ nav ul li {
     padding: 12px;
 }
 
-.fa:before {
+nav .bx:before {
     font-size: 16px;
 }
 

@@ -1,6 +1,7 @@
 package config
 
 import (
+	"log"
 	"os"
 	"strconv"
 
@@ -32,7 +33,13 @@ var Envs = initConfig()
 func initConfig() *Config {
 	err := godotenv.Load()
 	if err != nil {
-		panic(err)
+		log.Print("Error loading .env file")
+		log.Println("Creating empty .env file, with default values for required variables")
+		createEmptyEnvFile()
+		err = godotenv.Load()
+		if err != nil {
+			log.Fatal("Error loading .env file")
+		}
 	}
 
 	return &Config{
@@ -81,4 +88,19 @@ func getEnvAsBool(key string, fallback bool) bool {
 		}
 	}
 	return fallback
+}
+
+func createEmptyEnvFile() {
+	f, err := os.Create(".env")
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer f.Close()
+
+	_, err = f.WriteString(
+		"GITHUB_CLIENT_ID=\nGITHUB_CLIENT_SECRET=\nDISCORD_CLIENT_ID=\nDISCORD_CLIENT_SECRET=\n",
+	)
+	if err != nil {
+		log.Fatal(err)
+	}
 }

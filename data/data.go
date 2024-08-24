@@ -47,12 +47,22 @@ func (s *Storage) CreateOrUpdateUser(gothUser goth.User) error {
 		}
 	}
 
+	appendProviderID(gothUser.Provider, gothUser.UserID, user)
 	err = updateUser(s.db, user)
 	if err != nil {
 		return fmt.Errorf("Error updating user: %v", err)
 	}
 
 	return nil
+}
+
+func appendProviderID(provider string, userId string, user *User) {
+	switch provider {
+	case "discord":
+		user.DiscordID = userId
+	case "github":
+		user.GithubID = userId
+	}
 }
 
 func getUser(db *sql.DB, user *User) error {
@@ -110,13 +120,7 @@ func buildUserFromGothUser(gothUser goth.User) *User {
 		Email: gothUser.Email,
 	}
 
-	switch gothUser.Provider {
-	case "discord":
-		user.DiscordID = gothUser.UserID
-	case "github":
-		user.GithubID = gothUser.UserID
-	}
-
+	appendProviderID(gothUser.Provider, gothUser.UserID, user)
 	return user
 }
 

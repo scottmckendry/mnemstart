@@ -20,6 +20,12 @@ jobs:
             - name: Test
               run: go run gotest.tools/gotestsum@latest --junitfile unit-tests.xml --format pkgname
 
+            - name: Test summary
+              uses: test-summary/action@v2
+              with:
+                  paths: unit-tests.xml
+              if: always()
+
     release-please:
         name: Release
         runs-on: ubuntu-latest

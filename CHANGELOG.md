@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.5.0](https://github.com/scottmckendry/mnemstart/compare/v0.4.1...v0.5.0) (2024-08-24)
+
+
+### Features
+
+* **ui:** add QoL default shortcuts for modals ([5b6cec4](https://github.com/scottmckendry/mnemstart/commit/5b6cec4c0e26c2c1ac3b1044af1d49e4dd238a8e))
+
+
+### Bug Fixes
+
+* **settings:** add err check for insert query ([6627e9e](https://github.com/scottmckendry/mnemstart/commit/6627e9e42a10cc4fdd6e073447594e22d00421a9))
+
 ## [0.4.1](https://github.com/scottmckendry/mnemstart/compare/v0.4.0...v0.4.1) (2024-08-24)
 
 

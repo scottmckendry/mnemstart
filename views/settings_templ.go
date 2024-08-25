@@ -43,14 +43,14 @@ func Settings(user goth.User, settings *data.UserSettings) templ.Component {
 				}()
 			}
 			ctx = templ.InitializeContext(ctx)
-			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<div class=\"setting\"><label for=\"leaderKey\">Leader Key</label> <input type=\"text\" name=\"leaderKey\" value=\"")
+			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<div class=\"settings-container\"><div class=\"setting\"><label for=\"leaderKey\">Leader Key</label> <input type=\"text\" name=\"leaderKey\" value=\"")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
 			var templ_7745c5c3_Var3 string
 			templ_7745c5c3_Var3, templ_7745c5c3_Err = templ.JoinStringErrs(settings.LeaderKey)
 			if templ_7745c5c3_Err != nil {
-				return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/settings.templ`, Line: 12, Col: 65}
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/settings.templ`, Line: 13, Col: 66}
 			}
 			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var3))
 			if templ_7745c5c3_Err != nil {
@@ -68,7 +68,7 @@ func Settings(user goth.User, settings *data.UserSettings) templ.Component {
 				var templ_7745c5c3_Var4 string
 				templ_7745c5c3_Var4, templ_7745c5c3_Err = templ.JoinStringErrs(name)
 				if templ_7745c5c3_Err != nil {
-					return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/settings.templ`, Line: 19, Col: 25}
+					return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/settings.templ`, Line: 20, Col: 26}
 				}
 				_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var4))
 				if templ_7745c5c3_Err != nil {
@@ -91,7 +91,7 @@ func Settings(user goth.User, settings *data.UserSettings) templ.Component {
 				var templ_7745c5c3_Var5 string
 				templ_7745c5c3_Var5, templ_7745c5c3_Err = templ.JoinStringErrs(name)
 				if templ_7745c5c3_Err != nil {
-					return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/settings.templ`, Line: 19, Col: 78}
+					return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/settings.templ`, Line: 20, Col: 79}
 				}
 				_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var5))
 				if templ_7745c5c3_Err != nil {
@@ -102,17 +102,27 @@ func Settings(user goth.User, settings *data.UserSettings) templ.Component {
 					return templ_7745c5c3_Err
 				}
 			}
-			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</select></div><div class=\"setting\"><label for=\"suggestions\" class=\"tooltip-container\">Show Google-Powered Suggestions <icon class=\"bx bx-help-circle\"></icon><p class=\"tooltip-text\">This feature will send your search queries to Google to provide suggestions - regardless of your search engine choice.</p></label> <input type=\"checkbox\" name=\"suggestions\"")
+			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</select></div><div class=\"setting\"><label for=\"suggestions\" class=\"tooltip-container\">Show Google-Powered Suggestions <icon class=\"bx bx-help-circle\"></icon><p class=\"tooltip-text\">This feature will send your search queries to Google to provide suggestions - regardless of your search engine choice.</p></label> <select name=\"suggestions\" data-include-edit=\"\"><option value=\"true\"")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
 			if settings.ShowSuggestions {
-				_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(" checked")
+				_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(" selected")
 				if templ_7745c5c3_Err != nil {
 					return templ_7745c5c3_Err
 				}
 			}
-			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(" data-include-edit=\"\"></div><div class=\"action-buttons\"><button class=\"button\" _=\"on click trigger closeModal\" hx-put=\"/update-settings\" hx-include=\"input[data-include-edit],select[data-include-edit]\">Save</button></div>")
+			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(">Yes</option> <option value=\"false\"")
+			if templ_7745c5c3_Err != nil {
+				return templ_7745c5c3_Err
+			}
+			if !settings.ShowSuggestions {
+				_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(" selected")
+				if templ_7745c5c3_Err != nil {
+					return templ_7745c5c3_Err
+				}
+			}
+			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(">No</option></select></div><div class=\"action-buttons\"><button class=\"button\" _=\"on click trigger closeModal\" hx-put=\"/update-settings\" hx-include=\"input[data-include-edit],select[data-include-edit]\">Save</button></div></div>")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}

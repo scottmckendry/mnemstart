@@ -192,6 +192,43 @@ nav:hover .caret-rotate {
     transform: rotate(-90deg);
 }
 
+.settings-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.setting {
+    margin-bottom: 10px;
+}
+
+.tooltip-container {
+    position: relative;
+    display: inline-block;
+}
+
+.tooltip-text {
+    visibility: hidden;
+    width: 250px;
+    background-color: #555;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 10px;
+    position: absolute;
+    z-index: 1;
+    bottom: 125%;
+    left: 50%;
+    margin-left: -60px;
+    opacity: 0;
+    transition: opacity 0.3s;
+    font-size: 0.75rem;
+}
+
+.tooltip-container:hover .tooltip-text {
+    visibility: visible;
+    opacity: 1;
+}
+
 /*modal styles*/
 #modal {
     /* Underlay covers entire screen. */
@@ -305,6 +342,17 @@ nav:hover .caret-rotate {
 
 #modal input {
     padding: 5px;
+    width: 100%;
+    border-radius: 5px;
+    background-color: #444;
+    outline: none;
+    border: none;
+    color: #fff;
+}
+
+#modal select {
+    padding: 8px !important;
+    font-size: inherit;
     width: 100%;
     border-radius: 5px;
     background-color: #444;

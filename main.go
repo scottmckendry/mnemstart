@@ -54,6 +54,7 @@ func main() {
 		r.Get("/mappings/edit/{id}", handler.HandleMappingEdit)
 		r.Put("/mappings/update/{id}", handler.HandleMappingUpdate)
 		r.Delete("/mappings/delete/{id}", handler.HandleMappingDelete)
+		r.Post("/search/suggest", handler.HandleSearchSuggest)
 	})
 
 	// auth

@@ -10,9 +10,14 @@ templ Settings(user goth.User, settings *data.UserSettings) {
 		<label for="leaderKey">Leader Key</label>
 		<input type="text" name="leaderKey" value={ settings.LeaderKey } placeholder="Leader Key" data-include-edit=""/>
 		<label for="searchEngine">Search Engine</label>
-		<input type="text" name="searchEngine" value={ settings.SearchEngine } placeholder="Search Engine" data-include-edit=""/>
+		<select name="searchEngine" data-include-edit="">
+			// See search.templ for the full list of search engines
+			for name := range searchEngines {
+				<option value={ name } selected?={ settings.SearchEngine == name }>{ name }</option>
+			}
+		</select>
 		<div class="action-buttons">
-			<button class="button" _="on click trigger closeModal" hx-put="/update-settings" hx-include="input[data-include-edit]">Save</button>
+			<button class="button" _="on click trigger closeModal" hx-put="/update-settings" hx-include="input[data-include-edit],select[data-include-edit]">Save</button>
 		</div>
 	}
 }

@@ -34,6 +34,8 @@ func (h *Handler) HandleSettingsUpdate(w http.ResponseWriter, r *http.Request) {
 	userSettings := h.store.GetUserSettings(user.Email)
 	userSettings.LeaderKey = r.FormValue("leaderKey")
 	userSettings.SearchEngine = r.FormValue("searchEngine")
+
+	log.Println(userSettings)
 	h.store.UpdateUserSettings(user.Email, userSettings)
 
 	mappings := h.store.GetMappings(user.Email)

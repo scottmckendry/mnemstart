@@ -11,9 +11,7 @@ templ Home(user goth.User, settings *data.UserSettings, mappings []data.Mapping)
 	@Page(true, user) {
 		<div id="main-content">
 			@Clock()
-			<form action={ templ.SafeURL(settings.SearchEngine) } method="get">
-				<input type="text" id="search" name="q" placeholder="Search..."/>
-			</form>
+			@Search(settings)
 		</div>
 		<p id="status"></p>
 		<script src="/public/js/input.js"></script>

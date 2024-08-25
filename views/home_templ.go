@@ -59,16 +59,11 @@ func Home(user goth.User, settings *data.UserSettings, mappings []data.Mapping) 
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
-			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<form action=\"")
+			templ_7745c5c3_Err = Search(settings).Render(ctx, templ_7745c5c3_Buffer)
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
-			var templ_7745c5c3_Var3 templ.SafeURL = templ.SafeURL(settings.SearchEngine)
-			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(string(templ_7745c5c3_Var3)))
-			if templ_7745c5c3_Err != nil {
-				return templ_7745c5c3_Err
-			}
-			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("\" method=\"get\"><input type=\"text\" id=\"search\" name=\"q\" placeholder=\"Search...\"></form></div><p id=\"status\"></p><script src=\"/public/js/input.js\"></script>")
+			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</div><p id=\"status\"></p><script src=\"/public/js/input.js\"></script>")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
@@ -95,9 +90,9 @@ func Clock() templ.Component {
 			}()
 		}
 		ctx = templ.InitializeContext(ctx)
-		templ_7745c5c3_Var4 := templ.GetChildren(ctx)
-		if templ_7745c5c3_Var4 == nil {
-			templ_7745c5c3_Var4 = templ.NopComponent
+		templ_7745c5c3_Var3 := templ.GetChildren(ctx)
+		if templ_7745c5c3_Var3 == nil {
+			templ_7745c5c3_Var3 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<div id=\"clock\"></div><div id=\"date\"></div><script>\r\n        function updateClock() {\r\n            const now = new Date();\r\n            const hours = now.getHours();\r\n            const minutes = now.getMinutes().toString().padStart(2, '0');\r\n            document.getElementById(\"clock\").textContent = `${hours}:${minutes}`;\r\n\r\n            datestr = now.toLocaleDateString(undefined, { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });\r\n            document.getElementById(\"date\").textContent = datestr;\r\n        }\r\n\r\n        setInterval(updateClock, 5000);\r\n        updateClock();\r\n    </script>")

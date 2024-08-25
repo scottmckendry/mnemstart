@@ -1,0 +1,57 @@
+package views
+
+import (
+	"github.com/scottmckendry/mnemstart/data"
+)
+
+type SearchEngine struct {
+	URL        string
+	QueryParam string
+}
+
+var searchEngines = map[string]SearchEngine{
+	"Google": {
+		URL:        "https://www.google.com/search",
+		QueryParam: "q",
+	},
+	"DuckDuckGo": {
+		URL:        "https://duckduckgo.com/",
+		QueryParam: "q",
+	},
+	"Bing": {
+		URL:        "https://www.bing.com/search",
+		QueryParam: "q",
+	},
+	"Brave Search": {
+		URL:        "https://search.brave.com/search",
+		QueryParam: "q",
+	},
+}
+
+templ Search(settings *data.UserSettings) {
+	<form action={ templ.SafeURL(searchEngines[settings.SearchEngine].URL) } method="get">
+		<input
+			type="text"
+			id="search"
+			name={ searchEngines[settings.SearchEngine].QueryParam }
+			placeholder="Search..."
+			hx-post="/search/suggest"
+			hx-target="#suggestions"
+			hx-trigger="input changed delay:500ms"
+			autocomplete="off"
+		/>
+		// hidden form value that indicates the search engine
+		<input type="hidden" name="search_engine" value={ settings.SearchEngine }/>
+	</form>
+	<div id="suggestions"></div>
+}
+
+templ Suggestions(suggestions []string, engine string) {
+	for _, suggestion := range suggestions {
+		<a href={ templ.SafeURL(searchEngines[engine].URL + "?" + searchEngines[engine].QueryParam + "=" + suggestion) }>
+			<div class="suggestion">
+				{ suggestion }
+			</div>
+		</a>
+	}
+}

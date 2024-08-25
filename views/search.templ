@@ -30,16 +30,26 @@ var searchEngines = map[string]SearchEngine{
 
 templ Search(settings *data.UserSettings) {
 	<form action={ templ.SafeURL(searchEngines[settings.SearchEngine].URL) } method="get">
-		<input
-			type="text"
-			id="search"
-			name={ searchEngines[settings.SearchEngine].QueryParam }
-			placeholder="Search..."
-			hx-post="/search/suggest"
-			hx-target="#suggestions"
-			hx-trigger="input changed delay:500ms"
-			autocomplete="off"
-		/>
+		if settings.ShowSuggestions {
+			<input
+				type="text"
+				id="search"
+				name={ searchEngines[settings.SearchEngine].QueryParam }
+				placeholder="Search..."
+				hx-post="/search/suggest"
+				hx-target="#suggestions"
+				hx-trigger="input changed delay:500ms"
+				autocomplete="off"
+			/>
+		} else {
+			<input
+				type="text"
+				id="search"
+				name={ searchEngines[settings.SearchEngine].QueryParam }
+				placeholder="Search..."
+				autocomplete="off"
+			/>
+		}
 		// hidden form value that indicates the search engine
 		<input type="hidden" name="search_engine" value={ settings.SearchEngine }/>
 	</form>

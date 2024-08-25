@@ -29,8 +29,9 @@ type Mapping struct {
 }
 
 type UserSettings struct {
-	SearchEngine string
-	LeaderKey    string
+	SearchEngine    string
+	LeaderKey       string
+	ShowSuggestions bool
 }
 
 func NewStore(db *sql.DB) *Storage {
@@ -280,6 +281,8 @@ func (s *Storage) GetUserSettings(email string) *UserSettings {
 			settings.SearchEngine = value
 		case "LeaderKey":
 			settings.LeaderKey = value
+		case "ShowSuggestions":
+			settings.ShowSuggestions = value == "true"
 		}
 	}
 
@@ -288,8 +291,9 @@ func (s *Storage) GetUserSettings(email string) *UserSettings {
 
 func (s *Storage) UpdateUserSettings(email string, settings *UserSettings) error {
 	settingsMap := map[string]interface{}{
-		"SearchEngine": settings.SearchEngine,
-		"LeaderKey":    settings.LeaderKey,
+		"SearchEngine":    settings.SearchEngine,
+		"LeaderKey":       settings.LeaderKey,
+		"ShowSuggestions": fmt.Sprintf("%t", settings.ShowSuggestions), // "true" or "false
 	}
 
 	for settingKey, settingValue := range settingsMap {

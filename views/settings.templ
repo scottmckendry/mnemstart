@@ -7,15 +7,26 @@ import (
 
 templ Settings(user goth.User, settings *data.UserSettings) {
 	@Modal("Settings") {
-		<label for="leaderKey">Leader Key</label>
-		<input type="text" name="leaderKey" value={ settings.LeaderKey } placeholder="Leader Key" data-include-edit=""/>
-		<label for="searchEngine">Search Engine</label>
-		<select name="searchEngine" data-include-edit="">
-			// See search.templ for the full list of search engines
-			for name := range searchEngines {
-				<option value={ name } selected?={ settings.SearchEngine == name }>{ name }</option>
-			}
-		</select>
+		<div class="setting">
+			<label for="leaderKey">Leader Key</label>
+			<input type="text" name="leaderKey" value={ settings.LeaderKey } placeholder="Leader Key" data-include-edit=""/>
+		</div>
+		<div class="setting">
+			<label for="searchEngine">Search Engine</label>
+			<select name="searchEngine" data-include-edit="">
+				// See search.templ for the full list of search engines
+				for name := range searchEngines {
+					<option value={ name } selected?={ settings.SearchEngine == name }>{ name }</option>
+				}
+			</select>
+		</div>
+		<div class="setting">
+			<label for="suggestions" class="tooltip-container">
+				Show Google-Powered Suggestions <icon class="bx bx-help-circle"></icon>
+				<p class="tooltip-text">This feature will send your search queries to Google to provide suggestions - regardless of your search engine choice.</p>
+			</label>
+			<input type="checkbox" name="suggestions" checked?={ settings.ShowSuggestions } data-include-edit=""/>
+		</div>
 		<div class="action-buttons">
 			<button class="button" _="on click trigger closeModal" hx-put="/update-settings" hx-include="input[data-include-edit],select[data-include-edit]">Save</button>
 		</div>

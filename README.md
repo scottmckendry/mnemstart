@@ -10,11 +10,19 @@ Mnemstart is available for you to use at [start.scottmckendry.tech](https://star
 
 -   GitHub
 -   Discord
+-   Google
+-   GitLab
 
 Hover over the `<` icon in the top right corder to reveal _mappings_, _settings_ and _logout_ buttons.
 
+It's recommended to use mnemstart in combination with a new tab extension to replace your browser's default new tab page. Some popular options include:
+
+-   [New Tab Redirect](https://github.com/jimschubert/NewTab-Redirect)
+-   [Custom New Tab Url](https://github.com/zach-adams/simple-new-tab-url)
+
 ### ⌨️ Default Shortcuts
 
+-   `?` - Show default shortcuts
 -   `i` - Reveal search bar
 -   `esc` - Clear shortcut, un-focus search bar and close modals
 -   `alt+m` - Open mappings

@@ -19,3 +19,7 @@ func (h *Handler) HandleRoot(w http.ResponseWriter, r *http.Request) {
 
 	views.Home(user, userSettings, mappings).Render(r.Context(), w)
 }
+
+func (h *Handler) HandleHelp(w http.ResponseWriter, r *http.Request) {
+	views.Help().Render(r.Context(), w)
+}

@@ -30,6 +30,9 @@ templ Page(nav bool, user goth.User) {
 						<a href="https://github.com/scottmckendry/mnemstart/">
 							<li class="bx bxl-github navicon"></li>
 						</a>
+						<a href="#" hx-get="/help" hx-target="body" hx-swap="beforeend" hx-trigger="click, keyup[key=='?'] from:body">
+							<li class="bx bx-help-circle navicon"></li>
+						</a>
 						<a href={ templ.SafeURL(fmt.Sprintf("/auth/%s/logout", user.Provider)) }>
 							<li class="bx bx-exit navicon"></li>
 						</a>
@@ -39,4 +42,35 @@ templ Page(nav bool, user goth.User) {
 			{ children... }
 		</body>
 	</html>
+}
+
+templ Help() {
+	@Modal("Default Shortcuts") {
+		<table id="mappings-table">
+			<tr>
+				<th>Key</th>
+				<th>Action</th>
+			</tr>
+			<tr>
+				<td><kbd>?</kbd></td>
+				<td>Open this help dialog</td>
+			</tr>
+			<tr>
+				<td><kbd>Esc</kbd></td>
+				<td>Close this and any other open dialogs</td>
+			</tr>
+			<tr>
+				<td><kbd>i</kbd></td>
+				<td>Focus the search input</td>
+			</tr>
+			<tr>
+				<td><kbd>alt</kbd> + <kbd>s</kbd></td>
+				<td>Open settings</td>
+			</tr>
+			<tr>
+				<td><kbd>alt</kbd> + <kbd>m</kbd></td>
+				<td>Open mappings</td>
+			</tr>
+		</table>
+	}
 }

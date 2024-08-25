@@ -34,7 +34,7 @@ func Page(nav bool, user goth.User) templ.Component {
 			return templ_7745c5c3_Err
 		}
 		if nav {
-			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<nav><span class=\"bx bx-caret-left navicon caret-rotate\"></span><ul><a href=\"#\" hx-get=\"/mappings\" hx-target=\"body\" hx-swap=\"beforeend\" hx-trigger=\"click, keyup[altKey&amp;&amp;key==&#39;m&#39;] from:body\"><li class=\"bx bx-map-alt navicon\"></li></a> <a href=\"#\" hx-get=\"/settings\" hx-target=\"body\" hx-swap=\"beforeend\" hx-trigger=\"click, keyup[altKey&amp;&amp;key==&#39;s&#39;] from:body\"><li class=\"bx bx-cog navicon\"></li></a> <a href=\"https://github.com/scottmckendry/mnemstart/\"><li class=\"bx bxl-github navicon\"></li></a> <a href=\"")
+			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<nav><span class=\"bx bx-caret-left navicon caret-rotate\"></span><ul><a href=\"#\" hx-get=\"/mappings\" hx-target=\"body\" hx-swap=\"beforeend\" hx-trigger=\"click, keyup[altKey&amp;&amp;key==&#39;m&#39;] from:body\"><li class=\"bx bx-map-alt navicon\"></li></a> <a href=\"#\" hx-get=\"/settings\" hx-target=\"body\" hx-swap=\"beforeend\" hx-trigger=\"click, keyup[altKey&amp;&amp;key==&#39;s&#39;] from:body\"><li class=\"bx bx-cog navicon\"></li></a> <a href=\"https://github.com/scottmckendry/mnemstart/\"><li class=\"bx bxl-github navicon\"></li></a> <a href=\"#\" hx-get=\"/help\" hx-target=\"body\" hx-swap=\"beforeend\" hx-trigger=\"click, keyup[key==&#39;?&#39;] from:body\"><li class=\"bx bx-help-circle navicon\"></li></a> <a href=\"")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
@@ -53,6 +53,50 @@ func Page(nav bool, user goth.User) templ.Component {
 			return templ_7745c5c3_Err
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</body></html>")
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		return templ_7745c5c3_Err
+	})
+}
+
+func Help() templ.Component {
+	return templruntime.GeneratedTemplate(func(templ_7745c5c3_Input templruntime.GeneratedComponentInput) (templ_7745c5c3_Err error) {
+		templ_7745c5c3_W, ctx := templ_7745c5c3_Input.Writer, templ_7745c5c3_Input.Context
+		templ_7745c5c3_Buffer, templ_7745c5c3_IsBuffer := templruntime.GetBuffer(templ_7745c5c3_W)
+		if !templ_7745c5c3_IsBuffer {
+			defer func() {
+				templ_7745c5c3_BufErr := templruntime.ReleaseBuffer(templ_7745c5c3_Buffer)
+				if templ_7745c5c3_Err == nil {
+					templ_7745c5c3_Err = templ_7745c5c3_BufErr
+				}
+			}()
+		}
+		ctx = templ.InitializeContext(ctx)
+		templ_7745c5c3_Var3 := templ.GetChildren(ctx)
+		if templ_7745c5c3_Var3 == nil {
+			templ_7745c5c3_Var3 = templ.NopComponent
+		}
+		ctx = templ.ClearChildren(ctx)
+		templ_7745c5c3_Var4 := templruntime.GeneratedTemplate(func(templ_7745c5c3_Input templruntime.GeneratedComponentInput) (templ_7745c5c3_Err error) {
+			templ_7745c5c3_W, ctx := templ_7745c5c3_Input.Writer, templ_7745c5c3_Input.Context
+			templ_7745c5c3_Buffer, templ_7745c5c3_IsBuffer := templruntime.GetBuffer(templ_7745c5c3_W)
+			if !templ_7745c5c3_IsBuffer {
+				defer func() {
+					templ_7745c5c3_BufErr := templruntime.ReleaseBuffer(templ_7745c5c3_Buffer)
+					if templ_7745c5c3_Err == nil {
+						templ_7745c5c3_Err = templ_7745c5c3_BufErr
+					}
+				}()
+			}
+			ctx = templ.InitializeContext(ctx)
+			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<table id=\"mappings-table\"><tr><th>Key</th><th>Action</th></tr><tr><td><kbd>?</kbd></td><td>Open this help dialog</td></tr><tr><td><kbd>Esc</kbd></td><td>Close this and any other open dialogs</td></tr><tr><td><kbd>i</kbd></td><td>Focus the search input</td></tr><tr><td><kbd>alt</kbd> + <kbd>s</kbd></td><td>Open settings</td></tr><tr><td><kbd>alt</kbd> + <kbd>m</kbd></td><td>Open mappings</td></tr></table>")
+			if templ_7745c5c3_Err != nil {
+				return templ_7745c5c3_Err
+			}
+			return templ_7745c5c3_Err
+		})
+		templ_7745c5c3_Err = Modal("Default Shortcuts").Render(templ.WithChildren(ctx, templ_7745c5c3_Var4), templ_7745c5c3_Buffer)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}

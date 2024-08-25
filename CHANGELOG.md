@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.7.0](https://github.com/scottmckendry/mnemstart/compare/v0.6.0...v0.7.0) (2024-08-25)
+
+
+### Features
+
+* **search:** add search suggestions and selection of engines ([07c2b26](https://github.com/scottmckendry/mnemstart/commit/07c2b2602178e734af1a3c847acf54455c5d6c80))
+* **settings:** add setting for toggling search suggestions ([f526619](https://github.com/scottmckendry/mnemstart/commit/f526619fee7b625bd0ed21b4211a38c0573cf2ba))
+* **ui:** add help popup and shortcut ([87f31ce](https://github.com/scottmckendry/mnemstart/commit/87f31ce8e54b37096ec5404d5f3ecf1481875976))
+* **ui:** style search suggestions ([30c49ed](https://github.com/scottmckendry/mnemstart/commit/30c49ed74790d157724a41a4982349d138dcd910))
+* **ui:** update modal styles and layout ([a4d72d8](https://github.com/scottmckendry/mnemstart/commit/a4d72d802bce2b2f36074a9178d90eae943c766f))
+* **ui:** update settings modal style ([8b7071a](https://github.com/scottmckendry/mnemstart/commit/8b7071af9d81e0437c0dae9e05c0a23f9552cf9f))
+
 ## [0.6.0](https://github.com/scottmckendry/mnemstart/compare/v0.5.0...v0.6.0) (2024-08-24)
 
 

@@ -102,7 +102,7 @@ func Settings(user goth.User, settings *data.UserSettings) templ.Component {
 					return templ_7745c5c3_Err
 				}
 			}
-			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</select></div><div class=\"setting\"><label for=\"suggestions\" class=\"tooltip-container\">Show Google-Powered Suggestions <icon class=\"bx bx-help-circle\"></icon><p class=\"tooltip-text\">This feature will send your search queries to Google to provide suggestions - regardless of your search engine choice.</p></label> <select name=\"suggestions\" data-include-edit=\"\"><option value=\"true\"")
+			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</select></div><div class=\"setting\"><label for=\"suggestions\" class=\"tooltip-container\">Show Google-Powered Suggestions (experimental) <icon class=\"bx bx-help-circle\"></icon><p class=\"tooltip-text\">This feature will send your search queries to Google to provide suggestions - regardless of your search engine choice.<br><br>Google has a tendency to localise suggestions. Becuase the requests are made from the mnemstart server, the suggestions may not be relevant to your local area.</p></label> <select name=\"suggestions\" data-include-edit=\"\"><option value=\"on\"")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
@@ -112,7 +112,7 @@ func Settings(user goth.User, settings *data.UserSettings) templ.Component {
 					return templ_7745c5c3_Err
 				}
 			}
-			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(">Yes</option> <option value=\"false\"")
+			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(">Yes</option> <option value=\"off\"")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}

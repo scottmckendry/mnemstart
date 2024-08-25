@@ -101,7 +101,7 @@ a {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    margin-top: 30vh;
 }
 
 #clock {
@@ -130,6 +130,23 @@ a {
     border: none;
     opacity: 0;
     transition: all 0.2s ease-in-out;
+}
+
+#suggestions {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    width: 50vw;
+}
+
+#suggestions a {
+    padding: 10px 15px;
+    margin: 10px;
+    color: #fff;
+    text-decoration: none;
+    background-color: #333;
+    transition: all 0.2s ease-in-out;
+    border-radius: 0.25rem;
 }
 
 #search:focus {

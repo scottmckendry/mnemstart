@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.7.1](https://github.com/scottmckendry/mnemstart/compare/v0.7.0...v0.7.1) (2024-08-25)
+
+
+### Bug Fixes
+
+* **keymaps:** custom mappings not immediately available on save ([0b28342](https://github.com/scottmckendry/mnemstart/commit/0b2834286348de62aeebca4008a85582a4e9672f))
+
 ## [0.7.0](https://github.com/scottmckendry/mnemstart/compare/v0.6.0...v0.7.0) (2024-08-25)
 
 

@@ -6,7 +6,7 @@ import (
 )
 
 templ Settings(user goth.User, settings *data.UserSettings) {
-	@Modal("Settings") {
+	@Modal("Settings", false) {
 		<div class="settings-container">
 			<div class="setting">
 				<label for="leaderKey">Leader Key</label>

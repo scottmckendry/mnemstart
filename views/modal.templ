@@ -1,9 +1,13 @@
 package views
 
-templ Modal(title string) {
+templ Modal(title string, reloadOnClose bool) {
 	<div
 		id="modal"
-		_="on closeModal add .closing then wait for animationend then remove me"
+		if reloadOnClose {
+			_="on closeModal add .closing then wait for animationend then remove me then go to location.reload()"
+		} else {
+			_="on closeModal add .closing then wait for animationend then remove me"
+		}
 	>
 		<div class="modal-underlay" _="on click trigger closeModal"></div>
 		<div class="modal-content">

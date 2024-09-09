@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.7.2](https://github.com/scottmckendry/mnemstart/compare/v0.7.1...v0.7.2) (2024-09-09)
+
+
+### Bug Fixes
+
+* **ui:** include font-face css in dom ([aa0f543](https://github.com/scottmckendry/mnemstart/commit/aa0f543a3750491fc07d1ec4a6d66956f65b9693))
+
 ## [0.7.1](https://github.com/scottmckendry/mnemstart/compare/v0.7.0...v0.7.1) (2024-08-25)
 
 

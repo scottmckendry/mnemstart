@@ -9,7 +9,7 @@ require (
 	github.com/joho/godotenv v1.5.1
 	github.com/markbates/goth v1.80.0
 	github.com/tursodatabase/libsql-client-go v0.0.0-20240812094001-348a4e45b535
-	modernc.org/sqlite v1.33.1
+	modernc.org/sqlite v1.34.1
 )
 
 require (

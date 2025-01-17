@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.7.3](https://github.com/scottmckendry/mnemstart/compare/v0.7.2...v0.7.3) (2025-01-17)
+
+
+### Bug Fixes
+
+* **auth:** fix securecookie error when session value is too long ([84b5cda](https://github.com/scottmckendry/mnemstart/commit/84b5cda61cb07007cda3b87b40befcca7752c6f1)), closes [#31](https://github.com/scottmckendry/mnemstart/issues/31)
+
 ## [0.7.2](https://github.com/scottmckendry/mnemstart/compare/v0.7.1...v0.7.2) (2024-09-09)
 
 

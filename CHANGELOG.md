@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.7.4](https://github.com/scottmckendry/mnemstart/compare/v0.7.3...v0.7.4) (2025-03-17)
+
+
+### Bug Fixes
+
+* release dependency updates ([a5c1ce8](https://github.com/scottmckendry/mnemstart/commit/a5c1ce86545c27bdb69a0354485f36cdbfcec1b2))
+
 ## [0.7.3](https://github.com/scottmckendry/mnemstart/compare/v0.7.2...v0.7.3) (2025-01-17)
 
 

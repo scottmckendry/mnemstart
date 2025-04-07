@@ -9,7 +9,7 @@ require (
 	github.com/go-chi/chi/v5 v5.2.1
 	github.com/gorilla/sessions v1.1.1
 	github.com/joho/godotenv v1.5.1
-	github.com/markbates/goth v1.80.0
+	github.com/markbates/goth v1.81.0
 	github.com/tursodatabase/libsql-client-go v0.0.0-20240812094001-348a4e45b535
 	modernc.org/sqlite v1.37.0
 )

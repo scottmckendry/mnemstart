@@ -18,8 +18,7 @@ tmp/*
 go.work
 go.work.sum
 
-# env file
+# app
 .env
-
-# db
 *.db
+sessions/*

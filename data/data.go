@@ -3,7 +3,7 @@ package data
 import (
 	"database/sql"
 	"fmt"
-	"log"
+	"log/slog"
 
 	"github.com/markbates/goth"
 )
@@ -159,7 +159,7 @@ func (s *Storage) GetMappings(email string) []Mapping {
 		email,
 	)
 	if err != nil {
-		log.Println(err)
+		slog.Error("failed to get mappings", "error", err)
 		return nil
 	}
 	defer rows.Close()
@@ -168,6 +168,7 @@ func (s *Storage) GetMappings(email string) []Mapping {
 		mapping := Mapping{}
 		err = rows.Scan(&mapping.ID, &mapping.Keymap, &mapping.MapsTo)
 		if err != nil {
+			slog.Error("failed to scan mapping row", "error", err)
 			return nil
 		}
 
@@ -191,6 +192,7 @@ func (s *Storage) GetMapping(mappingID string, email string) *Mapping {
 	)
 	err := row.Scan(&mapping.ID, &mapping.Keymap, &mapping.MapsTo)
 	if err != nil {
+		slog.Error("failed to get mapping", "error", err, "mappingID", mappingID)
 		return nil
 	}
 
@@ -265,6 +267,7 @@ func (s *Storage) GetUserSettings(email string) *UserSettings {
 		email,
 	)
 	if err != nil {
+		slog.Error("failed to get user settings", "error", err, "email", email)
 		return nil
 	}
 	defer rows.Close()
@@ -273,6 +276,7 @@ func (s *Storage) GetUserSettings(email string) *UserSettings {
 		var key, value string
 		err = rows.Scan(&key, &value)
 		if err != nil {
+			slog.Error("failed to scan settings row", "error", err)
 			return nil
 		}
 

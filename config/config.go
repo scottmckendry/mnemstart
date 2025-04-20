@@ -1,7 +1,7 @@
 package config
 
 import (
-	"log"
+	"log/slog"
 	"os"
 	"strconv"
 
@@ -37,7 +37,7 @@ var Envs = initConfig()
 func initConfig() *Config {
 	err := godotenv.Load()
 	if err != nil {
-		log.Print("No .env file found. Using default environment variables.")
+		slog.Warn("No .env file found. Using default environment variables.")
 	}
 
 	return &Config{

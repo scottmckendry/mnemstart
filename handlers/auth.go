@@ -2,8 +2,7 @@ package handlers
 
 import (
 	"context"
-	"fmt"
-	"log"
+	"log/slog"
 	"net/http"
 
 	"github.com/go-chi/chi/v5"
@@ -22,8 +21,7 @@ func (h *Handler) HandleProviderLogin(w http.ResponseWriter, r *http.Request) {
 
 	// try to get the user without re-authenticating
 	if u, err := gothic.CompleteUserAuth(w, r); err == nil {
-		log.Printf("User already authenticated! %v", u)
-
+		slog.Info("user already authenticated", "user", u)
 		views.Login().Render(r.Context(), w)
 	} else {
 		gothic.BeginAuthHandler(w, r)
@@ -36,19 +34,20 @@ func (h *Handler) HandleAuthCallbackFunction(w http.ResponseWriter, r *http.Requ
 
 	user, err := gothic.CompleteUserAuth(w, r)
 	if err != nil {
-		fmt.Fprintln(w, err)
+		slog.Error("failed to complete user authentication", "error", err)
+		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
 
 	err = h.auth.StoreUserSession(w, r, user)
 	if err != nil {
-		log.Println(err)
+		slog.Error("failed to store user session", "error", err)
 		return
 	}
 
 	err = h.store.CreateOrUpdateUser(user)
 	if err != nil {
-		log.Println(err)
+		slog.Error("failed to create or update user", "error", err)
 		return
 	}
 
@@ -60,11 +59,11 @@ func (h *Handler) HandleLogout(w http.ResponseWriter, r *http.Request) {
 	provider := chi.URLParam(r, "provider")
 	r = r.WithContext(context.WithValue(r.Context(), "provider", provider))
 
-	log.Println("Logging out...")
+	slog.Info("logging out user")
 
 	err := gothic.Logout(w, r)
 	if err != nil {
-		log.Println(err)
+		slog.Error("failed to logout user", "error", err)
 		return
 	}
 

@@ -3,7 +3,7 @@ package auth
 import (
 	"encoding/gob"
 	"fmt"
-	"log"
+	"log/slog"
 	"net/http"
 
 	"github.com/gorilla/sessions"
@@ -86,7 +86,7 @@ func (a *AuthService) StoreUserSession(
 func (a *AuthService) RemoveUserSession(w http.ResponseWriter, r *http.Request) {
 	session, err := gothic.Store.Get(r, SessionName)
 	if err != nil {
-		log.Println("User session not found")
+		slog.Warn("User session not found")
 		http.Redirect(w, r, "/login", http.StatusTemporaryRedirect)
 		return
 	}
@@ -102,19 +102,19 @@ func RequireAuth(auth *AuthService) func(next http.Handler) http.Handler {
 		return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 			session, err := auth.GetSessionUser(r)
 			if err != nil {
-				log.Println("User is not authenticated!")
+				slog.Warn("user is not authenticated", "error", err)
 				http.Redirect(w, r, "/login", http.StatusTemporaryRedirect)
 				return
 			}
 
-			log.Printf("Authenticated user: %v", session.Email)
+			slog.Info("authenticated user", "email", session.Email)
 			next.ServeHTTP(w, r)
 		})
 	}
 }
 
 func buildCallbackURL(provider string) string {
-	hostUrl := fmt.Sprintf("%s", config.Envs.PublicHost)
+	hostUrl := config.Envs.PublicHost
 	if config.Envs.SendPortInCallback {
 		hostUrl = fmt.Sprintf("%s:%s", hostUrl, config.Envs.Port)
 	}

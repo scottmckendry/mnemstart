@@ -3,8 +3,9 @@ package main
 import (
 	"database/sql"
 	"fmt"
-	"log"
+	"log/slog"
 	"net/http"
+	"os"
 
 	"github.com/go-chi/chi/v5"
 	"github.com/go-chi/chi/v5/middleware"
@@ -16,9 +17,13 @@ import (
 )
 
 func main() {
+	logger := slog.New(slog.NewTextHandler(os.Stdout, nil))
+	slog.SetDefault(logger)
+
 	db, err := data.NewLibSqlDatabase(config.Envs.DatabaseURL)
 	if err != nil {
-		log.Fatalf("Error opening database: %v", err)
+		slog.Error("failed to open database", "error", err)
+		os.Exit(1)
 	}
 
 	store := data.NewStore(db)
@@ -26,14 +31,15 @@ func main() {
 	initStorage(db)
 
 	sessionStore, err := auth.NewFileStore(auth.SessionOptions{
-		StorePath:  "./sessions", // Add this line - specify where to store session files
+		StorePath:  "./sessions",
 		CookiesKey: config.Envs.CookiesAuthSecret,
 		MaxAge:     config.Envs.CookiesAuthAgeInSeconds,
 		HttpOnly:   config.Envs.CookiesAuthIsHttpOnly,
 		Secure:     config.Envs.CookiesAuthIsSecure,
 	})
 	if err != nil {
-		log.Fatalf("Error creating session store: %v", err)
+		slog.Error("failed to create session store", "error", err)
+		os.Exit(1)
 	}
 	authService := auth.NewAuthService(sessionStore)
 
@@ -71,15 +77,22 @@ func main() {
 	// static content
 	r.Handle("/public/*", http.StripPrefix("/public/", http.FileServer(http.Dir("public"))))
 
-	log.Printf("Server: Listening on %s:%s", config.Envs.PublicHost, config.Envs.Port)
-	log.Fatal(http.ListenAndServe(fmt.Sprintf(":%s", config.Envs.Port), r))
+	slog.Info("server starting",
+		"host", config.Envs.PublicHost,
+		"port", config.Envs.Port)
+
+	if err := http.ListenAndServe(fmt.Sprintf(":%s", config.Envs.Port), r); err != nil {
+		slog.Error("server failed to start", "error", err)
+		os.Exit(1)
+	}
 }
 
 func initStorage(db *sql.DB) {
 	err := db.Ping()
 	if err != nil {
-		log.Fatalf("Error pinging database: %v", err)
+		slog.Error("failed to ping database", "error", err)
+		os.Exit(1)
 	}
 
-	log.Println("DB: Connected!")
+	slog.Info("database connected")
 }

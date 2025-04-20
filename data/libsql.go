@@ -3,7 +3,8 @@ package data
 import (
 	"database/sql"
 	"fmt"
-	"log"
+	"log/slog"
+	"os"
 
 	_ "github.com/tursodatabase/libsql-client-go/libsql"
 	_ "modernc.org/sqlite"
@@ -12,7 +13,8 @@ import (
 func NewLibSqlDatabase(url string) (*sql.DB, error) {
 	db, err := sql.Open("libsql", url)
 	if err != nil {
-		log.Fatalf("Error opening database: %v", err)
+		slog.Error("failed to open database", "error", err)
+		os.Exit(1)
 	}
 
 	err = generateSchema(db)

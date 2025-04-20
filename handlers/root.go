@@ -1,7 +1,7 @@
 package handlers
 
 import (
-	"log"
+	"log/slog"
 	"net/http"
 
 	"github.com/scottmckendry/mnemstart/views"
@@ -10,7 +10,7 @@ import (
 func (h *Handler) HandleRoot(w http.ResponseWriter, r *http.Request) {
 	user, err := h.auth.GetSessionUser(r)
 	if err != nil {
-		log.Println(err)
+		slog.Error("failed to get session user", "error", err)
 		return
 	}
 

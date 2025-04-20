@@ -1,7 +1,7 @@
 package handlers
 
 import (
-	"log"
+	"log/slog"
 	"net/http"
 
 	"github.com/go-chi/chi/v5"
@@ -12,7 +12,7 @@ import (
 func (h *Handler) HandleMappings(w http.ResponseWriter, r *http.Request) {
 	user, err := h.auth.GetSessionUser(r)
 	if err != nil {
-		log.Println(err)
+		slog.Error("failed to get session user", "error", err)
 		return
 	}
 
@@ -23,7 +23,7 @@ func (h *Handler) HandleMappings(w http.ResponseWriter, r *http.Request) {
 func (h *Handler) HandleMapping(w http.ResponseWriter, r *http.Request) {
 	user, err := h.auth.GetSessionUser(r)
 	if err != nil {
-		log.Println(err)
+		slog.Error("failed to get session user", "error", err)
 		return
 	}
 
@@ -39,13 +39,13 @@ func (h *Handler) HandleMappingNew(w http.ResponseWriter, r *http.Request) {
 func (h *Handler) HandleMappingAdd(w http.ResponseWriter, r *http.Request) {
 	user, err := h.auth.GetSessionUser(r)
 	if err != nil {
-		log.Println(err)
+		slog.Error("failed to get session user", "error", err)
 		return
 	}
 
 	err = r.ParseForm()
 	if err != nil {
-		log.Println(err)
+		slog.Error("failed to parse form", "error", err)
 		return
 	}
 
@@ -59,7 +59,7 @@ func (h *Handler) HandleMappingAdd(w http.ResponseWriter, r *http.Request) {
 func (h *Handler) HandleMappingDelete(w http.ResponseWriter, r *http.Request) {
 	user, err := h.auth.GetSessionUser(r)
 	if err != nil {
-		log.Println(err)
+		slog.Error("failed to get session user", "error", err)
 		return
 	}
 
@@ -72,7 +72,7 @@ func (h *Handler) HandleMappingDelete(w http.ResponseWriter, r *http.Request) {
 func (h *Handler) HandleMappingEdit(w http.ResponseWriter, r *http.Request) {
 	user, err := h.auth.GetSessionUser(r)
 	if err != nil {
-		log.Println(err)
+		slog.Error("failed to get session user", "error", err)
 		return
 	}
 
@@ -84,13 +84,13 @@ func (h *Handler) HandleMappingEdit(w http.ResponseWriter, r *http.Request) {
 func (h *Handler) HandleMappingUpdate(w http.ResponseWriter, r *http.Request) {
 	user, err := h.auth.GetSessionUser(r)
 	if err != nil {
-		log.Println(err)
+		slog.Error("failed to get session user", "error", err)
 		return
 	}
 
 	err = r.ParseForm()
 	if err != nil {
-		log.Println(err)
+		slog.Error("failed to parse form", "error", err)
 		return
 	}
 

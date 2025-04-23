@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.8.1](https://github.com/scottmckendry/mnemstart/compare/v0.8.0...v0.8.1) (2025-04-23)
+
+
+### Bug Fixes
+
+* group name in docker file ([05930bf](https://github.com/scottmckendry/mnemstart/commit/05930bfd1c2b78f4c3bf85cf8ca567b82665cf5a))
+
 ## [0.8.0](https://github.com/scottmckendry/mnemstart/compare/v0.7.4...v0.8.0) (2025-04-23)
 
 

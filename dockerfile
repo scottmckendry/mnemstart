@@ -17,9 +17,8 @@ COPY --from=builder /build/public ./public
 RUN chown -R root:root /app && \
     chmod -R 755 /app && \
     mkdir -p /app/data && \
-    chown -R nobody:nobody /app/data && \
-    chmod -R 755 /app/data 
+    chown -R nobody:nogroup /app/data
 
-USER nobody:nobody
+USER nobody:nogroup
 EXPOSE 3000
 ENTRYPOINT ["./mnemstart"]

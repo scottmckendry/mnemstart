@@ -31,7 +31,7 @@ func main() {
 	initStorage(db)
 
 	sessionStore, err := auth.NewFileStore(auth.SessionOptions{
-		StorePath:  "./sessions",
+		StorePath:  "./data/sessions",
 		CookiesKey: config.Envs.CookiesAuthSecret,
 		MaxAge:     config.Envs.CookiesAuthAgeInSeconds,
 		HttpOnly:   config.Envs.CookiesAuthIsHttpOnly,

@@ -6,13 +6,20 @@ COPY . .
 
 RUN go install github.com/a-h/templ/cmd/templ@latest
 RUN templ generate
-RUN CGO_ENABLED=0 GOOS=linux go build -o app
+RUN CGO_ENABLED=0 GOOS=linux go build -o mnemstart
 
 # Copy built binary and static files to a new image
 FROM alpine:latest
 WORKDIR /app
-COPY --from=builder /build/app .
+COPY --from=builder /build/mnemstart .
 COPY --from=builder /build/public ./public
 
+RUN chown -R root:root /app && \
+    chmod -R 755 /app && \
+    mkdir -p /app/data && \
+    chown -R nobody:nobody /app/data && \
+    chmod -R 755 /app/data 
+
+USER nobody:nobody
 EXPOSE 3000
-ENTRYPOINT ["./app"]
+ENTRYPOINT ["./mnemstart"]

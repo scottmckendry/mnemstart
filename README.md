@@ -8,25 +8,25 @@
 
 Mnemstart is available for you to use at [start.scottmckendry.tech](https://start.scottmckendry.tech). Sign in with one of the following providers:
 
--   GitHub
--   Discord
--   Google
--   GitLab
+- GitHub
+- Discord
+- Google
+- GitLab
 
 Hover over the `<` icon in the top right corder to reveal _mappings_, _settings_ and _logout_ buttons.
 
 It's recommended to use mnemstart in combination with a new tab extension to replace your browser's default new tab page. Some popular options include:
 
--   [New Tab Redirect](https://github.com/jimschubert/NewTab-Redirect)
--   [Custom New Tab Url](https://github.com/zach-adams/simple-new-tab-url)
+- [New Tab Redirect](https://github.com/jimschubert/NewTab-Redirect)
+- [Custom New Tab Url](https://github.com/zach-adams/simple-new-tab-url)
 
 ### ⌨️ Default Shortcuts
 
--   `?` - Show default shortcuts
--   `i` - Reveal search bar
--   `esc` - Clear shortcut, un-focus search bar and close modals
--   `alt+m` - Open mappings
--   `alt+s` - Open settings
+- `?` - Show default shortcuts
+- `i` - Reveal search bar
+- `esc` - Clear shortcut, un-focus search bar and close modals
+- `alt+m` - Open mappings
+- `alt+s` - Open settings
 
 ### 🪄 Custom Shortcuts
 
@@ -44,18 +44,18 @@ Any custom mappings will **always** be prefixed with the leader key, which is `S
 
 Some reasons you might want to self-host mnemstart:
 
--   **Latency**: mnemstart is blazing fast. However, the mnemstart server is geographically located in New Zealand. If you're not in New Zealand, you might experience some latency. Self-hosting mnemstart will allow you to run the server closer to you, or even on your local network.
--   **Privacy**: By design, mnemstart stores your email address and name, as well as any custom mappings and settings you provide. None of this information is shared with third parties, but you might still prefer to host it yourself.
+- **Latency**: mnemstart is blazing fast. However, the mnemstart server is geographically located in New Zealand. If you're not in New Zealand, you might experience some latency. Self-hosting mnemstart will allow you to run the server closer to you, or even on your local network.
+- **Privacy**: By design, mnemstart stores your email address and name, as well as any custom mappings and settings you provide. None of this information is shared with third parties, but you might still prefer to host it yourself.
 
 Luckily, self-hosting mnemstart is easy. The whole application (including the database) is contained in a single Docker container. You can run it on any machine that has Docker installed.
 
 > [!IMPORTANT]
 > To self-host mnemstart, you will need to register a new OAuth application with at least one of the supported providers:
 >
-> -   [GitHub](https://docs.github.com/en/apps/oauth-apps/building-oauth-apps/creating-an-oauth-app)
-> -   [Discord](https://discord.com/developers/docs/topics/oauth2)
-> -   [Google](https://developers.google.com/identity/protocols/oauth2)
-> -   [GitLab](https://docs.gitlab.com/ee/integration/oauth_provider.html)
+> - [GitHub](https://docs.github.com/en/apps/oauth-apps/building-oauth-apps/creating-an-oauth-app)
+> - [Discord](https://discord.com/developers/docs/topics/oauth2)
+> - [Google](https://developers.google.com/identity/protocols/oauth2)
+> - [GitLab](https://docs.gitlab.com/ee/integration/oauth_provider.html)
 
 ### 🐋 Using Docker Compose
 
@@ -89,21 +89,23 @@ COOKIES_AUTH_HTTP_ONLY=true # Set to false if you want to access cookies from Ja
 
 ```yml
 services:
-    mnemstart:
-        image: ghcr.io/scottmckendry/mnemstart
-        ports:
-            - "3000:3000"
-        env_file:
-            - .env
-        volumes:
-            - /etc/localtime:/etc/localtime:ro
-            - ./mnemstart.db:/mnemstart/mnemstart.db
-            - ./.env:/mnemstart/.env
-        restart: unless-stopped
+  mnemstart:
+    image: ghcr.io/scottmckendry/mnemstart
+    ports:
+      - "3000:3000"
+    env_file:
+      - .env
+    volumes:
+      # read-only access to the host's timezone
+      - /etc/localtime:/etc/localtime:ro
+      # empty directory to store user sessions and SQLite database
+      - ./data/:/app/data
+      # read-only access to the .env file
+      - ./.env:/app/.env:ro
+    restart: unless-stopped
 ```
 
-4. `touch mnemstart.db` to create an empty SQLite database file.
-5. Run `docker-compose up -d` to start the container in the background.
+4. Run `docker-compose up -d` to start the container in the background.
 
 ## 🧑‍💻 Development
 
@@ -117,9 +119,9 @@ services:
 
 **Dependencies:**
 
--   Go 1.23 or later
--   air (`go install github.com/air-verse/air@latest`) - for live reloading
--   templ (`go install github.com/a-h/templ@latest`)
+- Go 1.23 or later
+- air (`go install github.com/air-verse/air@latest`) - for live reloading
+- templ (`go install github.com/a-h/templ@latest`)
 
 **Steps:**
 

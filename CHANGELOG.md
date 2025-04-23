@@ -1,5 +1,14 @@
 # Changelog
 
+## [0.8.0](https://github.com/scottmckendry/mnemstart/compare/v0.7.4...v0.8.0) (2025-04-23)
+
+
+### Features
+
+* **container:** optimise image build ([3643e35](https://github.com/scottmckendry/mnemstart/commit/3643e3581beb834228b6af4e26e782e5be65c74a))
+* image security improvements ([b9a5225](https://github.com/scottmckendry/mnemstart/commit/b9a5225b445e2dacfaf2853a6a51d973ee9180ef))
+* use structured logging where practical ([839f3b1](https://github.com/scottmckendry/mnemstart/commit/839f3b1c9ec7e6e5e682597c264a31f02df092de))
+
 ## [0.7.4](https://github.com/scottmckendry/mnemstart/compare/v0.7.3...v0.7.4) (2025-03-17)
 
 

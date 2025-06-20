@@ -119,7 +119,7 @@ services:
 
 **Dependencies:**
 
-- Go 1.23 or later
+- Go 1.24 or later
 - air (`go install github.com/air-verse/air@latest`) - for live reloading
 - templ (`go install github.com/a-h/templ@latest`)
 

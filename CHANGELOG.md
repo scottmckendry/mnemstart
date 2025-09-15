@@ -1,5 +1,20 @@
 # Changelog
 
+## [0.9.0](https://github.com/scottmckendry/mnemstart/compare/v0.8.1...v0.9.0) (2025-09-15)
+
+
+### Features
+
+* **deps:** update module github.com/markbates/goth ( v1.81.0 → v1.82.0 ) ([ceafa25](https://github.com/scottmckendry/mnemstart/commit/ceafa25f7d901e65b63d613614812a9d575142a1))
+* **docker:** run as uid 1000 ([a78a008](https://github.com/scottmckendry/mnemstart/commit/a78a008fcef9e72035364f7a75cf837e4af595ab))
+
+
+### Bug Fixes
+
+* **deps:** update module github.com/a-h/templ ( v0.3.898 → v0.3.906 ) ([#61](https://github.com/scottmckendry/mnemstart/issues/61)) ([edfbbcc](https://github.com/scottmckendry/mnemstart/commit/edfbbccc488471ff4d4099773a97598ac48172da))
+* **deps:** update module github.com/a-h/templ ( v0.3.906 → v0.3.924 ) ([121fafd](https://github.com/scottmckendry/mnemstart/commit/121fafd86464e01f6a1f6f6db660689ea02ddf2a))
+* **deps:** update module github.com/go-chi/chi/v5 ( v5.2.1 → v5.2.2 ) [security] ([5ae4ef9](https://github.com/scottmckendry/mnemstart/commit/5ae4ef917a152edec4f0034247943739334bbf20))
+
 ## [0.8.1](https://github.com/scottmckendry/mnemstart/compare/v0.8.0...v0.8.1) (2025-04-23)
 
 

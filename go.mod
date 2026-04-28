@@ -5,7 +5,7 @@ go 1.24.0
 require (
 	github.com/a-h/templ v0.3.924
 	github.com/go-chi/chi/v5 v5.2.2
-	github.com/gorilla/sessions v1.1.1
+	github.com/gorilla/sessions v1.4.0
 	github.com/joho/godotenv v1.5.1
 	github.com/markbates/goth v1.82.0
 	github.com/tursodatabase/libsql-client-go v0.0.0-20240902231107-85af5b9d094d

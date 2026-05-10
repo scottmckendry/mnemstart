@@ -1,9 +1,9 @@
 module github.com/scottmckendry/mnemstart
 
-go 1.24.0
+go 1.25.0
 
 require (
-	github.com/a-h/templ v0.3.924
+	github.com/a-h/templ v0.3.1020
 	github.com/go-chi/chi/v5 v5.2.2
 	github.com/gorilla/sessions v1.1.1
 	github.com/joho/godotenv v1.5.1
@@ -26,7 +26,7 @@ require (
 	github.com/remyoudompheng/bigfft v0.0.0-20230129092748-24d4a6f8daec // indirect
 	golang.org/x/exp v0.0.0-20250620022241-b7579e27df2b // indirect
 	golang.org/x/oauth2 v0.30.0 // indirect
-	golang.org/x/sys v0.33.0 // indirect
+	golang.org/x/sys v0.41.0 // indirect
 	modernc.org/libc v1.66.0 // indirect
 	modernc.org/mathutil v1.7.1 // indirect
 	modernc.org/memory v1.11.0 // indirect
